@@ -1,0 +1,237 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/carro_esportivo.jpg');
+    background-size: cover;
+}
+
+.container {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.container p {
+    font-size: 17px;
+}
+
+.container button {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.header {
+    height: 100px;
+}
+
+.header img {
+    position: relative;
+    width: 20vw;
+    margin-left: 40px;
+    top: -30px;
+}
+
+.search-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #910506;
+    padding: 18px 36px;
+    color: white;
+    border-radius: 35px;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.search-section h1 {
+    text-align: center;
+}
+
+.search-section h2 {
+    margin: 10px 0;
+    font-weight: bolder;
+}
+
+.active {
+    background-color: #ffffff !important;
+    color: #ff0000 !important;
+}
+
+.search-buttons {
+    width: 100%;
+}
+
+.search-buttons button {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 40px;
+    margin: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+    width: 48%;
+}
+
+.search-buttons button:hover {
+    background-color: #ffffff;
+    color: #ff0000;
+}
+
+.search-buttons button:active,
+.search-buttons button:focus {
+    outline: none;
+    background-color: #e60000;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 55%;
+}
+
+.search-form select {
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color: #ff6161;
+    color: #f1b9b9;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.search-form label {
+    margin: 20px 0 10px 5px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.buttom-submit {
+    background-color: #910506;
+    color: #ffffff;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 20px auto 0 auto;
+}
+
+.buttom-submit:hover,
+.buttom-submit:focus {
+    background-color: #ffffff;
+    color: #910506;
+    border: 2px solid #910506;
+    outline: none;
+}
+
+
+.buttom-submit:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+.container-result {
+    padding: 18x 36px;
+    width: 100%;
+}
+
+.result-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #910506;
+    padding: 25px 36px;
+    color: white;
+    border-radius: 35px;
+    max-width: 40%;
+    margin: 0 auto;
+}
+
+.result-section h1 {
+    text-align: center;
+}
+
+.result-section h2 {
+    margin: 10px 0;
+    font-weight: bolder;
+}
+
+
+.container-btn {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    width: 100%;
+    background-color: #910506;
+}
+
+.container-btn button {
+    border: none;
+    background-color: #910506;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.container-table {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 35px;
+    margin-top: 20px;
+}
+
+.container-padding{
+    padding: 0 10px 10px 10px;
+}
+
+.container-values{
+    width: 100%;
+    border-bottom: 3px solid #910506;
+    margin-top: 35px;
+    display: flex;
+    flex-direction: row;
+}
+
+.container-values .label, .container-table .value{
+    color: #000;
+    font-size: 20px;
+}
+
+.container-values .value{
+    padding-left: 20px;
+}
+
+.container-values .label{
+    width: 32%;
+    border-right: 3px solid #910506;
+    font-weight: bold;
+}
+
+.container-values .underline{
+    width: 100%;
+    height: 10px;
+    background-color: #910506;
+
+}
+
+.container-values.price{
+    border-bottom: 3px solid #000;
+}
+
+.container-values.price .label, .container-values.price .value{
+    color: #e60000;
+    font-weight: bold;
+}
+
+.container-values.price .label{
+    border-right: 3px solid #000;
+}
