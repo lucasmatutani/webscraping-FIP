@@ -52,8 +52,8 @@ class SearchCarJob implements ShouldQueue
                                 'codigoModelo' => $model->fipe_id,
                                 'codigoTipoVeiculo' => 1,
                                 'anoModelo' => $year->year,
-                                'codigoTipoCombustivel' => 1,
-                                'tipoVeiculo' => 'carro',
+                                'codigoTipoCombustivel' => $year->fuel_type,
+                                'tipoVeiculo' => 1,
                                 'tipoConsulta' => 'tradicional'
                             ],
                         ];

@@ -52,9 +52,10 @@ class SearchYearJob implements ShouldQueue
                 foreach ($yearsData as $yearItem) {
                     preg_match('/^\d+/', $yearItem['Label'], $matches);
                     $yearNumber = intval($matches[0]);
+                    $type = explode("-", $yearItem['Value']);
 
                     Years::updateOrCreate(
-                        ['year' => $yearNumber, 'value' => $yearItem['Value'] ,'model_id' => $model->id]
+                        ['year' => $yearNumber, 'fuel_type' => $type[1], 'model_id' => $model->id]
                     );
                 }
                 sleep(2);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Years extends Model
 {
     use HasFactory;
-    protected $fillable = ['year', 'value', 'model_id'];
+    protected $fillable = ['year', 'fuel_type', 'model_id'];
 
     public function model()
     {

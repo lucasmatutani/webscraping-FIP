@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('years', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('year');
-            $table->string('value');
+            $table->string('fuel_type');
             $table->unsignedBigInteger('model_id');
             $table->foreign('model_id')->references('id')->on('models')->onDelete('cascade');
             $table->timestamps();

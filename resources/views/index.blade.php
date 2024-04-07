@@ -87,7 +87,7 @@
             </div>
         </section>
 
-        <section class="result-section" id="codeSearchSection" style="display: none;">
+        <section class="result-section" id="codeSearchSection" >
             <div class="container-result">
                 <div class="container-btn">
                     <button><i class="fas fa-print"></i> IMPRIMIR</button>
