@@ -36,7 +36,7 @@ class SearchBrandJob implements ShouldQueue
 
             $formParams = [
                 'form_params' => [
-                    'codigoTabelaReferencia' => 305,
+                    'codigoTabelaReferencia' => 308,
                     'codigoTipoVeiculo' => 1
                 ],
             ];

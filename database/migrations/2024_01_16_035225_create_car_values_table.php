@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('cars_values', function (Blueprint $table) {
             $table->id();
-            $table->string('valor');
-            $table->string('codigo_fipe');
-            $table->string('mes_referencia');
+            $table->string('value');
+            $table->string('fipe_code');
+            $table->string('reference_month');
+            $table->string('year');
             $table->unsignedBigInteger('model_id');
             $table->foreign('model_id')->references('id')->on('models')->onDelete('cascade');
             $table->timestamps();

@@ -47,7 +47,7 @@ class SearchCarJob implements ShouldQueue
                         
                         $formParams = [
                             'form_params' => [
-                                'codigoTabelaReferencia' => 306,
+                                'codigoTabelaReferencia' => 308,
                                 'codigoMarca' => $brand->fipe_id,
                                 'codigoModelo' => $model->fipe_id,
                                 'codigoTipoVeiculo' => 1,
@@ -68,12 +68,13 @@ class SearchCarJob implements ShouldQueue
 
                         CarsValue::updateOrCreate(
                             [
-                                'codigo_fipe' => $carData['CodigoFipe'],
-                                'model_id' => $model->id
+                                'fipe_code' => $carData['CodigoFipe'],
+                                'model_id' => $model->id,
+                                'year' => $year->year
                             ],
                             [
-                                'valor' => $carData['Valor'],
-                                'mes_referencia' => $carData['MesReferencia'],
+                                'value' => $carData['Valor'],
+                                'reference_month' => $carData['MesReferencia']
                             ]
                         );
                         sleep(10);

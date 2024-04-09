@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CarsValue extends Model
 {
     use HasFactory;
-    protected $fillable = ['valor', 'codigo_fipe', 'mes_referencia', 'model_id'];
+    protected $fillable = ['value', 'fipe_code', 'reference_month', 'year', 'model_id'];
 }
