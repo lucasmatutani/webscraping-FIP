@@ -9,4 +9,9 @@ class CarsValue extends Model
 {
     use HasFactory;
     protected $fillable = ['value', 'fipe_code', 'reference_month', 'year', 'model_id'];
+
+    public function model()
+    {
+        return $this->belongsTo(Models::class);
+    }
 }

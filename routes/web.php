@@ -14,7 +14,10 @@ use App\Http\Controllers\FIPEController;
 |
 */
 
-Route::get('/fipe', [FipeController::class, 'execute']);
+Route::get('/api/brands', [FipeController::class, 'getBrands']);
+Route::get('/api/models/{brandId}', [FipeController::class, 'getModels']);
+Route::get('/api/years/{modelId}', [FipeController::class, 'getYears']);
+Route::get('/api/value', [FipeController::class, 'getCarValue']);
 
 Route::get('/', function () {
     return view('index');

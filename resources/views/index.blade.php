@@ -12,6 +12,9 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    @vite(['resources/js/app.js'])
 </head>
 
 <body>
@@ -21,6 +24,7 @@
 
     <div class="container">
         <section class="search-section" id="commonSearchSection">
+            
             <h1>CONSULTE O PREÇO DOS CARROS DA <br> TABELA FIPE EM TEMPO REAL</h1>
             <div class="search-buttons" id="searchButtons">
                 <button class="btnCommonSearch active" id="btnCommonSearch">PESQUISA COMUM</button>
@@ -39,17 +43,17 @@
             </p>
             <div class="search-form">
                 <label for="brand">Marca:</label>
-                <select name="brand" id="brand">
+                <select id="brandSelect" name="brand" style="width: 100%;">
                     <option value="">Selecione ou digite a marca</option>
                 </select>
-
+                
                 <label for="model">Modelo:</label>
-                <select name="model" id="model">
+                <select name="model" id="modelSelect">
                     <option value="">Selecione ou digite o modelo</option>
                 </select>
 
                 <label for="year">Ano:</label>
-                <select name="year" id="year">
+                <select id="yearSelect" name="year">
                     <option value="">Selecione ou digite o ano</option>
                 </select>
 
@@ -79,7 +83,7 @@
                 </select>
 
                 <label for="year">Ano:</label>
-                <select name="year" id="year">
+                <select name="year" id="year" >
                     <option value="">Selecione o ano do modelo</option>
                 </select>
 
@@ -87,7 +91,7 @@
             </div>
         </section>
 
-        <section class="result-section" id="codeSearchSection" >
+        <section class="result-section" id="result-section" style="display: none">
             <div class="container-result">
                 <div class="container-btn">
                     <button><i class="fas fa-print"></i> IMPRIMIR</button>
@@ -95,51 +99,46 @@
                 </div>
                 <div class="container-table">
                     <div class="container-padding">
+                    
+                        <div class="container-values price">
+                            <span class="label">Valor FIPE:</span>
+                            <span class="value" id="car_value"></span>
+                        </div>
+                        <span class="underline"></span>
+
                         <div class="container-values">
-                            <span class="label">Mês de Referência:</span>
-                            <span class="value">Janeiro de 2024</span>
+                            <span class="label">Mês Referência:</span>
+                            <span class="value" id="reference_month"></span>
                         </div>
                         <span class="underline"></span>
 
                         <div class="container-values">
                             <span class="label">Código FIPE:</span>
-                            <span class="value">038003-2</span>
+                            <span class="value" id="fipe_code"></span>
                         </div>
                         <span class="underline"></span>
 
                         <div class="container-values">
                             <span class="label">Marca:</span>
-                            <span class="value">Acura</span>
+                            <span class="value" id="brand-result"></span>
                         </div>
                         <span class="underline"></span>
 
                         <div class="container-values">
                             <span class="label">Modelo:</span>
-                            <span class="value">Integra GS 1.8</span>
+                            <span class="value" id="model-result"></span>
                         </div>
                         <span class="underline"></span>
 
                         <div class="container-values">
-                            <span class="label">Ano Modelo:</span>
-                            <span class="value">1992</span>
+                            <span class="label">Ano:</span>
+                            <span class="value" id="year-result"></span>
                         </div>
-                        <span class="underline"></span>
-
-                        <div class="container-values">
-                            <span class="label">Autenticação:</span>
-                            <span class="value">gpdl1jv8cd</span>
-                        </div>
-                        <span class="underline"></span>
+                        <span class="underline"></span>  
 
                         <div class="container-values">
                             <span class="label">Data da consulta:</span>
-                            <span class="value">domingo, 14 de janeiro de 2024 13:00</span>
-                        </div>
-                        <span class="underline"></span>
-
-                        <div class="container-values price">
-                            <span class="label">Preço Médio:</span>
-                            <span class="value">R$ 11.520,00</span>
+                            <span class="value" id="today"></span>
                         </div>
                         <span class="underline"></span>
                     </div>
@@ -148,7 +147,5 @@
             <button class="buttom-submit" type="submit">REFAZER PESQUISA</button>
         </section>
     </div>
-    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
-
 </html>

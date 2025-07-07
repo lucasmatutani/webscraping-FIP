@@ -8,157 +8,57 @@ use \App\Models\Brands;
 use \App\Models\Models;
 use \App\Models\Years;
 use \App\Models\CarsValue;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
 
 class FIPEController extends Controller
 {
-    private $client;
-
-    public function __construct()
+    public function getBrands()
     {
-        $this->client = new Client();
+        $brands = Cache::remember('brands', 60 * 24, function () {
+            return Brands::all(['id', 'name']);
+        });
+        return response()->json($brands);
     }
 
-    public function execute()
+    public function getModels($brandId)
     {
-        $this->searchCar();
+        $models = Models::where('brand_id', $brandId)->get(['id', 'name']);
+        return response()->json($models);
     }
 
-    public function searchBrand()
+    public function getYears($modelId)
     {
-        try {
-            $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarMarcas';
-
-            $formParams = [
-                'form_params' => [
-                    'codigoTabelaReferencia' => 305,
-                    'codigoTipoVeiculo' => 1
-                ],
-            ];
-
-            $response = $this->client->request('POST', $url, $formParams);
-
-            $brands = json_decode($response->getBody(), true);
-            foreach ($brands as $brand) {
-                Brands::updateOrCreate(
-                    ['fipe_id' => $brand['Value']],
-                    ['name' => $brand['Label']]
-                );
-            }
-            var_dump($brands);
-        } catch (GuzzleException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        $years = Years::where('model_id', $modelId)->get(['year', 'fuel_type']);
+        return response()->json($years);
     }
 
-    public function searchModel()
-    {
-        $brands = Brands::all();
-        foreach ($brands as $brand) {
-            try {
-                $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos';
+    public function getCarValue(Request $request)
+{
+    $modelId = $request->query('model_id');
+    $year = $request->query('year');
 
-                $formParams = [
-                    'form_params' => [
-                        'codigoTipoVeiculo' => 1,
-                        'codigoTabelaReferencia' => 305,
-                        'codigoMarca' => $brand->fipe_id
-                    ],
-                ];
-
-                $response = $this->client->request('POST', $url, $formParams);
-                $models = json_decode($response->getBody(), true);
-                foreach ($models["Modelos"] as $model) {
-                    Models::updateOrCreate(
-                        ['fipe_id' => $model['Value'], 'brand_id' => $brand->id],
-                        ['name' => $model['Label']]
-                    );
-                }
-            } catch (GuzzleException $e) {
-                // Trate a exceção conforme necessário
-                return response()->json(['error' => $e->getMessage()], 500);
-            }
-            exit();
-        }
+    if (!$modelId || !$year) {
+        return response()->json(['error' => 'Parâmetros ausentes'], 400);
     }
 
-    public function searchYear()
-    {
-        // $models = Models::all();
-        // foreach ($models as $model) {
-            try {
-                $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarAnoModelo';
+    $value = CarsValue::with('model.brand')
+                      ->where('model_id', $modelId)
+                      ->where('year', $year)
+                      ->first(['value', 'reference_month', 'fipe_code', 'year', 'model_id']);
 
-                $formParams = [
-                    'form_params' => [
-                        'codigoTipoVeiculo' => 1,
-                        'codigoTabelaReferencia' => 305,
-                        'codigoModelo' => 1,
-                        'codigoMarca' => 1
-                    ],
-                ];
-
-                $response = $this->client->request('POST', $url, $formParams);
-                $years = json_decode($response->getBody(), true);
-                foreach ($years as $year) {
-                    preg_match('/^\d+/', $year['Label'], $matches); // Extrai o ano numérico
-                    $yearNumber = intval($matches[0]);
-                    Years::updateOrCreate(
-                        ['year' => $yearNumber, 'value' => $year['Value'], 'model_id' => 1]
-                    );
-                }
-                exit();
-            } catch (GuzzleException $e) {
-                // Trate a exceção conforme necessário
-                return response()->json(['error' => $e->getMessage()], 500);
-            }
-        // }
+    if ($value) {
+        return response()->json([
+            'value' => $value->value,
+            'reference_month' => $value->reference_month,
+            'fipe_code' => $value->fipe_code,
+            'year' => $value->year,
+            'model' => $value->model->name ?? 'N/A',
+            'brand' => $value->model->brand->name ?? 'N/A'
+        ]);
+    } else {
+        return response()->json(['error' => 'Nenhum valor encontrado para essa combinação.'], 404);
     }
+}
 
-    public function searchCar()
-    {
-        $brands = Brands::all(); 
-
-        // foreach ($brands as $brand) {
-        //     $models = Models::where('brand_id', $brand->id)->get();
-
-            // foreach ($models as $model) {
-            //     $years = Years::where('model_id', $model->id)->get();
-
-                // foreach ($years as $year) {
-                    try {
-                        $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarValorComTodosParametros';
-
-                        $formParams = [
-                            'form_params' => [
-                                'codigoTabelaReferencia' => 306,
-                                'codigoMarca' => 2,
-                                'codigoModelo' => 4,
-                                'codigoTipoVeiculo' => 1,
-                                'anoModelo' => 2007,
-                                'codigoTipoCombustivel' => 3,
-                                'tipoVeiculo' => 'carro',
-                                'tipoConsulta' => 'tradicional'
-                            ],
-                        ];
-
-                        $response = $this->client->request('POST', $url, $formParams);
-                        $car = json_decode($response->getBody(), true);
-                        var_dump($car);
-                        exit();
-                        if(isset($car["erro"])){
-                            \Log::error('Erro no SearchCarJob: brand ' . $brand->fipe_id . " model " . $model->fipe_id . " year: " . $year->year . "\n");
-                        }
-                        CarsValue::create([
-                            'valor' => $car['Valor'],
-                            'codigo_fipe' => $car['CodigoFipe'],
-                            'mes_referencia' => $car['MesReferencia'],
-                            'model_id' => $model->id
-                        ]);
-                    } catch (GuzzleException $e) {
-                        return response()->json(['error' => $e->getMessage()], 500);
-                    }
-                // }
-            // }
-        // }
-    }
 }
