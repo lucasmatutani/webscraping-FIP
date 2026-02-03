@@ -45,6 +45,7 @@ body {
     border-radius: 35px;
     width: 40%;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .search-section h1 {
@@ -83,6 +84,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .search-buttons button:hover {
@@ -109,7 +111,7 @@ body {
     margin: 0 auto;
     border-radius: 20px;
     background-color: #ff6161 !important;
-    color: #fff;
+    color: #ffffff !important;
     font-size: 18px;
     font-weight: bold;
     border: none !important;
@@ -117,15 +119,46 @@ body {
     min-height: 0 !important;
 }
 
-.choices__list.choices__list--dropdown,
-.choices__input.choices__input--cloned
-{
-    background-color: #ff6161 !important;
-    border: none !important ;
+/* Texto do valor selecionado no select (fechado) */
+.choices__inner .choices__item--selectable,
+.choices__list--single .choices__item {
+    color: #ffffff !important;
 }
 
-.choices__item--selectable{
-    color: #fff;
+/* Campo de busca quando o dropdown está aberto */
+.choices__input.choices__input--cloned {
+    background-color: #ff6161 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+.choices__input.choices__input--cloned::placeholder {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Lista dropdown (opções ao abrir) */
+.choices__list.choices__list--dropdown {
+    background-color: #ff6161 !important;
+    border: none !important;
+}
+
+.choices__item--selectable {
+    color: #ffffff !important;
+}
+
+/* Garantir que o item destacado (hover/choice) também seja legível */
+.choices__item--choice.is-highlighted {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: #ffffff !important;
+}
+
+/* Container do valor único (select fechado) - fundo e texto legíveis */
+.choices__list--single {
+    color: #ffffff !important;
+}
+
+.choices__list--single .choices__placeholder {
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .search-form label {
@@ -178,6 +211,78 @@ body {
     opacity: 0.95;
 }
 
+.result-price {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 50px 0 0 0;
+    padding: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
+                 0 4px 12px rgba(0, 0, 0, 0.4),
+                 0 0 20px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.02em;
+}
+
+.result-price {
+    font-size: 32px !important;
+}
+
+@media (max-width: 450px) {
+    .result-price {
+        font-size: 1.75rem;
+        margin: 15px 0 0 0;
+    }
+
+    .result-action-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+.result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.result-actions .buttom-submit {
+    text-decoration: none;
+    margin: 0;
+}
+
+.result-action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    background-color: #910506;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.result-action-icon:hover,
+.result-action-icon:focus {
+    background-color: #ffffff;
+    color: #910506;
+    border-color: #910506;
+    outline: none;
+}
+
+.result-action-icon:active {
+    transform: translateY(2px);
+}
+
 .search-error {
     background-color: rgba(255, 255, 255, 0.2);
     padding: 10px 15px;
@@ -210,14 +315,14 @@ body {
 }
 
 .container-result {
-    width: 90%;
+    width: 60%;
 }
 
 .container-table {
     background-color: #ffffff;
-    padding: 25px;
+    padding: 15px;
     border-radius: 35px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .container-padding {
@@ -235,7 +340,7 @@ body {
 .container-values .label,
 .container-table .value {
     color: #000;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .container-values .value {
@@ -413,7 +518,7 @@ body {
 
     .container-values .label,
     .container-values .value {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .container-values .label {

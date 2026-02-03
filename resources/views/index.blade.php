@@ -39,9 +39,7 @@
                 <h2 id="currentDateCommon">Carregando data...</h2>
                 <p>
                     Primeiro, selecione a marca do seu carro. Depois, é só adicionar
-                    o modelo e o ano, na ordem que preferir. E se quiser agilizar,
-                    digite essas infos direto no campo de busca do formulário.
-                    Simples assim.
+                    o modelo e o ano.
                 </p>
                 <div class="search-form">
                     <label for="brandSelect">Marca:</label>

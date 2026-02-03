@@ -83,27 +83,14 @@
         <section class="result-section" aria-labelledby="result-title">
             @if(isset($car))
                 <h1 id="result-title" class="result-title">
-                    Valor FIPE: {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }}
+                    Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} – Valor Atualizado
                 </h1>
-                <p class="result-subtitle">Consulta realizada em {{ $dataConsulta }}</p>
+
+                <p class="result-price" aria-label="Valor FIPE">{{ $car['value'] }}</p>
 
                 <div class="container-result">
-                    <div class="container-btn">
-                        <button type="button" onclick="window.print()" aria-label="Imprimir resultado">
-                            <i class="fas fa-print" aria-hidden="true"></i> IMPRIMIR
-                        </button>
-                        <button type="button" id="copyUrlBtn" aria-label="Copiar URL para a área de transferência">
-                            <i class="fas fa-clipboard" aria-hidden="true"></i> COPIAR URL
-                        </button>
-                    </div>
                     <div class="container-table">
                         <div class="container-padding">
-                            <div class="container-values price">
-                                <span class="label">Valor FIPE:</span>
-                                <span class="value">{{ $car['value'] }}</span>
-                            </div>
-                            <span class="underline" aria-hidden="true"></span>
-
                             <div class="container-values">
                                 <span class="label">Mês Referência:</span>
                                 <span class="value">{{ $car['reference_month'] }}</span>
@@ -142,7 +129,15 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ url('/') }}" class="buttom-submit" style="text-decoration: none; display: inline-block; margin-top: 20px;">REFAZER PESQUISA</a>
+                <div class="result-actions">
+                    <a href="{{ url('/') }}" class="buttom-submit">REFAZER PESQUISA</a>
+                    <button type="button" onclick="window.print()" class="result-action-icon" aria-label="Imprimir resultado" title="Imprimir">
+                        <i class="fas fa-print" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" id="copyUrlBtn" class="result-action-icon" aria-label="Copiar URL" title="Copiar URL">
+                        <i class="fas fa-clipboard" aria-hidden="true"></i>
+                    </button>
+                </div>
             @else
                 <h1 id="result-title" class="result-title">Nenhum valor encontrado</h1>
                 <p>Não foi possível encontrar o valor FIPE para a combinação selecionada.</p>
@@ -156,9 +151,10 @@
         document.getElementById('copyUrlBtn').addEventListener('click', function() {
             navigator.clipboard.writeText('{{ $canonical }}').then(function() {
                 var btn = document.getElementById('copyUrlBtn');
-                var text = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> URL COPIADA';
-                setTimeout(function() { btn.innerHTML = text; }, 2000);
+                var icon = btn.querySelector('i');
+                var prevClass = icon.className;
+                icon.className = 'fas fa-check';
+                setTimeout(function() { icon.className = prevClass; }, 2000);
             });
         });
     </script>
