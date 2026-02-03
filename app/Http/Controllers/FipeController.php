@@ -61,4 +61,36 @@ class FIPEController extends Controller
     }
 }
 
+    /**
+     * Exibe a página de resultado da consulta FIPE (server-side para SEO).
+     */
+    public function showResult(Request $request)
+    {
+        $modelId = $request->query('model_id');
+        $year = $request->query('year');
+
+        if (!$modelId || !$year) {
+            return redirect('/')->with('error', 'Selecione modelo e ano para consultar.');
+        }
+
+        $value = CarsValue::with('model.brand')
+            ->where('model_id', $modelId)
+            ->where('year', $year)
+            ->first();
+
+        if (!$value) {
+            return redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.');
+        }
+
+        $car = [
+            'value' => $value->value,
+            'reference_month' => $value->reference_month,
+            'fipe_code' => $value->fipe_code,
+            'year' => $value->year,
+            'model' => $value->model->name ?? 'N/A',
+            'brand' => $value->model->brand->name ?? 'N/A',
+        ];
+
+        return view('result', ['car' => $car]);
+    }
 }

@@ -107,45 +107,27 @@ class ResultDisplayManager {
 
 
 class FormManager {
-    constructor(resultDisplayManager) {
-        this.resultDisplayManager = resultDisplayManager;
-        this.form = {
-            submitButton: document.querySelector(".buttom-submit"),
-            modelSelect: document.getElementById("modelSelect"),
-            yearSelect: document.getElementById("yearSelect")
-        };
-        this.init();
+    constructor() {
+        this.form = document.getElementById("searchForm");
+        this.modelSelect = document.getElementById("modelSelect");
+        this.yearSelect = document.getElementById("yearSelect");
+        if (this.form) {
+            this.init();
+        }
     }
 
     init() {
-        this.setupEventListeners();
+        this.form.addEventListener("submit", (event) => this.handleSubmit(event));
     }
 
-    setupEventListeners() {
-        this.form.submitButton.addEventListener("click", (event) => this.handleSubmit(event));
-    }
+    handleSubmit(event) {
+        const modelId = this.modelSelect?.value;
+        const year = this.yearSelect?.value;
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        
-        const modelId = this.form.modelSelect.value;
-        const year = this.form.yearSelect.value;
-
-        if (!this.validateForm(modelId, year)) {
+        if (!modelId || !year) {
+            event.preventDefault();
             alert("Por favor, selecione uma marca, modelo e ano.");
-            return;
         }
-
-        try {
-            const data = await CarValueService.fetchCarValue(modelId, year);
-            this.resultDisplayManager.displayResults(data);
-        } catch (error) {
-            alert("Erro ao buscar dados do veículo.");
-        }
-    }
-
-    validateForm(modelId, year) {
-        return modelId && year;
     }
 }
 
@@ -153,15 +135,18 @@ class FormManager {
 class App {
     static init() {
         this.setCurrentDate();
-        this.searchToggleManager = new SearchToggleManager();
-        this.resultDisplayManager = new ResultDisplayManager();
-        this.formManager = new FormManager(this.resultDisplayManager);
+        if (document.getElementById('codeSearchSection')) {
+            this.searchToggleManager = new SearchToggleManager();
+        }
+        this.formManager = new FormManager();
     }
 
     static setCurrentDate() {
         const currentDate = DateService.getCurrentMonthYear();
-        document.getElementById('currentDateCommon').textContent = currentDate;
-        document.getElementById('currentDateCode').textContent = currentDate;
+        const elCommon = document.getElementById('currentDateCommon');
+        const elCode = document.getElementById('currentDateCode');
+        if (elCommon) elCommon.textContent = currentDate;
+        if (elCode) elCode.textContent = currentDate;
     }
 }
 

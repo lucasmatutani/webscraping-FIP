@@ -79,6 +79,12 @@ body {
     width: 48%;
 }
 
+#searchForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .search-buttons button:hover {
     background-color: #ffffff;
     color: #ff0000;
@@ -155,13 +161,29 @@ body {
     box-shadow: none;
 }
 
-.result-section h1 {
+.result-section h1,
+.result-section .result-title {
     text-align: center;
+    margin: 0 0 10px 0;
 }
 
-.result-section h2 {
+.result-section h2,
+.result-section .result-subtitle {
     margin: 10px 0;
     font-weight: bolder;
+}
+
+.result-section .result-subtitle {
+    font-weight: 400;
+    opacity: 0.95;
+}
+
+.search-error {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 #brand {
