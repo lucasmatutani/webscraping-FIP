@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +7,8 @@
     <title>Valores Tabela FIPE - Carros do Brasil</title>
     <meta name="description"
         content="Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil. Encontre preços, modelos e mais informações de forma rápida e precisa.">
+    <link rel="icon" href="{{ asset('images/icon_i_love_carros.png') }}">
+
     {{-- <title>I ❤️ Carros</title> --}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
@@ -19,7 +20,7 @@
 
 <body>
     <div class="header">
-        <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Descrição">
+        <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Logo I Love Carros">
     </div>
 
     <div class="container">
@@ -63,4 +64,5 @@
         </form>
     </div>
 </body>
+
 </html>

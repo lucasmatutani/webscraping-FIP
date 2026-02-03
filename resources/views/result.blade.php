@@ -1,7 +1,7 @@
 @php
     $ano = isset($car) ? $car['year'] : null;
-    $title = isset($car) ? "Valor FIPE {$car['brand']} {$car['model']} {$ano} - Tabela FIPE | Carros do Brasil" : 'Valor FIPE - Tabela FIPE | Carros do Brasil';
-    $description = isset($car) ? "Consulte o valor FIPE do {$car['brand']} {$car['model']} {$ano}. Preço de referência: {$car['value']}. Mês de referência: {$car['reference_month']}. Código FIPE: {$car['fipe_code']}." : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
+    $title = isset($car) ? "FIPE: {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']}" : 'Tabela FIPE';
+    $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano}. Valor atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
     $canonical = url()->current();
     $dataConsulta = isset($car) ? now()->format('d/m/Y') : '';
 @endphp
@@ -14,19 +14,22 @@
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ $canonical }}">
+    <link rel="icon" href="{{ asset('images/icon_i_love_carros.png') }}">
 
     {{-- Open Graph --}}
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:site_name" content="Carros do Brasil - Tabela FIPE">
+    <meta property="og:image" content="{{ config('app.url') . asset('images/social_media.png') }}">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ config('app.url') . asset('images/social_media.png') }}">
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
@@ -39,6 +42,8 @@
         "@context": "https://schema.org",
         "@type": "Product",
         "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
+        "url": "{{ $canonical }}",
+        "image": "{{ asset('images/logo_i_love_carros.png') }}",
         "brand": {
             "@type": "Brand",
             "name": "{{ $car['brand'] }}"
@@ -46,7 +51,7 @@
         "description": "Valor FIPE de referência - {{ $car['reference_month'] }}",
         "offers": {
             "@type": "Offer",
-            "price": "{{ preg_replace('/[^0-9,]/', '', str_replace(',', '.', $car['value'])) }}",
+            "price": "{{ $car['value_schema'] }}",
             "priceCurrency": "BRL",
             "availability": "https://schema.org/InStock"
         },
@@ -85,9 +90,10 @@
                 <h1 id="result-title" class="result-title">
                     Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} – Valor Atualizado
                 </h1>
+                <p>Confira o valor de referência FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} para {{ $car['reference_month'] }}. Use como base para negociação e avaliação de usados.</p>
 
                 <p class="result-price" aria-label="Valor FIPE">{{ $car['value'] }}</p>
-
+                
                 <div class="container-result">
                     <div class="container-table">
                         <div class="container-padding">

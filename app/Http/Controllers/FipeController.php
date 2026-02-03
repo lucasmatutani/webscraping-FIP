@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use \App\Models\Brands;
-use \App\Models\Models;
-use \App\Models\Years;
-use \App\Models\CarsValue;
+use App\Models\Brands;
+use App\Models\Models;
+use App\Models\Years;
+use App\Models\CarsValue;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class FIPEController extends Controller
 {
@@ -82,15 +83,78 @@ class FIPEController extends Controller
             return redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.');
         }
 
+        $brandSlug = Str::slug($value->model->brand->name ?? '');
+        $modelSlug = Str::slug($value->model->name ?? '');
+        $yearRecord = Years::where('model_id', $value->model_id)->where('year', $value->year)->first();
+        $yearSegment = $yearRecord ? $value->year . '-' . $yearRecord->fuel_type : (string) $value->year;
+
+        return redirect()->route('resultado.slug', [
+            'brandSlug' => $brandSlug,
+            'modelSlug' => $modelSlug,
+            'year' => $yearSegment,
+        ], 301);
+    }
+
+    /**
+     * Exibe a página de resultado pela URL indexável (marca/modelo/ano).
+     */
+    public function showResultBySlug(string $brandSlug, string $modelSlug, string $year): \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+    {
+        $yearValue = preg_match('/^(\d+)/', $year, $m) ? (int) $m[1] : null;
+        if ($yearValue === null) {
+            return redirect('/')->with('error', 'Ano inválido.');
+        }
+
+        $brand = Brands::all()->first(function (Brands $b) use ($brandSlug) {
+            return Str::slug($b->name) === $brandSlug;
+        });
+
+        if (!$brand) {
+            return redirect('/')->with('error', 'Marca não encontrada.');
+        }
+
+        $model = Models::where('brand_id', $brand->id)->get()->first(function (Models $m) use ($modelSlug) {
+            return Str::slug($m->name) === $modelSlug;
+        });
+
+        if (!$model) {
+            return redirect('/')->with('error', 'Modelo não encontrado.');
+        }
+
+        $value = CarsValue::with('model.brand')
+            ->where('model_id', $model->id)
+            ->where('year', $yearValue)
+            ->first();
+
+        if (!$value) {
+            return redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.');
+        }
+
         $car = [
             'value' => $value->value,
+            'value_schema' => $this->normalizePriceForSchema($value->value),
             'reference_month' => $value->reference_month,
             'fipe_code' => $value->fipe_code,
-            'year' => $value->year,
+            'year' => (string) $value->year,
             'model' => $value->model->name ?? 'N/A',
             'brand' => $value->model->brand->name ?? 'N/A',
         ];
 
         return view('result', ['car' => $car]);
+    }
+
+    /**
+     * Normaliza o valor FIPE para o formato numérico do Schema.org (ex.: 125000.00).
+     * Formato brasileiro: vírgula = decimal, ponto = milhar (ex.: R$ 125.000,00).
+     */
+    private function normalizePriceForSchema(string $value): string
+    {
+        $cleaned = preg_replace('/[^0-9,.]/', '', $value);
+        $withoutThousands = str_replace('.', '', $cleaned);
+        $withDecimalDot = str_replace(',', '.', $withoutThousands);
+
+        $numeric = (float) $withDecimalDot;
+
+        return number_format($numeric, 2, '.', '');
     }
 }

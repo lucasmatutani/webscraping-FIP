@@ -20,6 +20,9 @@ Route::get('/api/years/{modelId}', [FIPEController::class, 'getYears']);
 Route::get('/api/value', [FIPEController::class, 'getCarValue']);
 
 Route::get('/resultado', [FIPEController::class, 'showResult'])->name('resultado');
+Route::get('/resultado/{brandSlug}/{modelSlug}/{year}', [FIPEController::class, 'showResultBySlug'])
+    ->where(['brandSlug' => '[a-z0-9\-]+', 'modelSlug' => '[a-z0-9\-]+', 'year' => '[0-9\-]+'])
+    ->name('resultado.slug');
 
 Route::get('/', function () {
     return view('index');
