@@ -25,11 +25,9 @@
     <div class="container">
         <section class="search-section" id="commonSearchSection">
             
-            <h1>CONSULTE O PREÇO DOS CARROS DA <br> TABELA FIPE EM TEMPO REAL</h1>
-            <div class="search-buttons" id="searchButtons">
-                <button class="btnCommonSearch active" id="btnCommonSearch">PESQUISA COMUM</button>
-                <button class="btnCodeSearch">PESQUISA POR CÓDIGO FIPE</button>
-            </div>
+            <h1>Consulta Tabela FIPE Atualizada</h1>
+            <h2>Preço de Carros Hoje</h2>
+            
             <p>
                 Sua pesquisa será realizada de acordo com o seguinte mês e ano
                 de referência:
@@ -60,37 +58,7 @@
                 <button class="buttom-submit" type="submit">PESQUISAR</button>
             </div>
         </section>
-
-        <section class="search-section code" style="display: none;" id="codeSearchSection">
-            <h1>CONSULTE O PREÇO DOS CARROS DA <br> TABELA FIPE EM TEMPO REAL</h1>
-            <div class="search-buttons" id="searchButtons">
-                <button class="btnCommonSearch active">PESQUISA COMUM</button>
-                <button class="btnCodeSearch">PESQUISA POR CÓDIGO FIPE</button>
-            </div>
-            <p>
-                Sua pesquisa será realizada de acordo com o seguinte mês e ano
-                de referência:
-            </p>
-            <h2 id="currentDateCode">Carregando data...</h2>
-            <p>
-                Agora, basta informar o Código Fipe e ano modelo do veículo que
-                você quer pesquisar.
-            </p>
-            <div class="search-form">
-                <label for="fipeCode">Código FIPE:</label>
-                <select name="fipeCode" id="fipeCode">
-                    <option value="">Digite o código FIPE</option>
-                </select>
-
-                <label for="year">Ano:</label>
-                <select name="year" id="year" >
-                    <option value="">Selecione o ano do modelo</option>
-                </select>
-
-                <button class="buttom-submit" type="submit">PESQUISAR</button>
-            </div>
-        </section>
-
+        
         <section class="result-section" id="result-section" style="display: none">
             <div class="container-result">
                 <div class="container-btn">
