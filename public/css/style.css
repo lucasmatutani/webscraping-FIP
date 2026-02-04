@@ -193,6 +193,53 @@ body {
     box-shadow: none;
 }
 
+/* Breadcrumb na página de resultado */
+.result-section__breadcrumb {
+    align-self: flex-start;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+.breadcrumb__item a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb__item a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.breadcrumb__item--current span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
 .result-section h1,
 .result-section .result-title {
     text-align: center;

@@ -96,6 +96,26 @@
 
     <main class="container" role="main">
         <section class="result-section" aria-labelledby="result-title">
+            <nav class="result-section__breadcrumb" aria-label="Breadcrumb">
+                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="{{ url('/') }}"><span itemprop="name">Início</span></a>
+                        <meta itemprop="position" content="1" />
+                    </li>
+                    @if(isset($car))
+                    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <link itemprop="item" href="{{ $canonical }}">
+                        <span itemprop="name">{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}</span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                    @else
+                    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <span itemprop="name">Nenhum valor encontrado</span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                    @endif
+                </ol>
+            </nav>
             @if(isset($car))
                 <h1 id="result-title" class="result-title">
                     Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} – Valor Atualizado
