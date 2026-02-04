@@ -61,7 +61,7 @@ class SearchModelJob implements ShouldQueue
                         );
                     }
                 }
-                sleep(2);
+                sleep(5);
             } catch (GuzzleException $e) {
                 \Log::error('Erro no SearchModelJob: ' . $e->getMessage());
             }

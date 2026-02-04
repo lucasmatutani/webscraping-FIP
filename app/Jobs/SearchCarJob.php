@@ -77,7 +77,7 @@ class SearchCarJob implements ShouldQueue
                                 'reference_month' => $carData['MesReferencia']
                             ]
                         );
-                        sleep(10);
+                        sleep(5);
                     } catch (GuzzleException $e) {
                         \Log::error('Erro no SearchCarJob: ' . $e->getMessage());
                     }

@@ -58,7 +58,7 @@ class SearchYearJob implements ShouldQueue
                         ['year' => $yearNumber, 'fuel_type' => $type[1], 'model_id' => $model->id]
                     );
                 }
-                sleep(2);
+                sleep(5);
             } catch (GuzzleException $e) {
                 \Log::error('Erro no SearchYearJob: ' . $e->getMessage());
             }

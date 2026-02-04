@@ -49,7 +49,7 @@ class SearchBrandJob implements ShouldQueue
                     ['fipe_id' => $brand['Value'], 'name' => $brand['Label']],
                 );
             }
-            sleep(2);
+            sleep(5);
             dispatch(new SearchModelJob());
         } catch (GuzzleException $e) {
             \Log::error('Erro no SearchBrandJob: ' . $e->getMessage());
