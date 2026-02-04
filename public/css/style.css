@@ -2,8 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../images/carro_esportivo.jpg');
-    background-size: cover;
+    background-color: #2c2a2a;
 }
 
 .container {
@@ -524,5 +523,117 @@ body {
 
     .container-values .label {
         width: 34%;
+    }
+}
+
+/* SEO Content - alinhado ao design do site */
+.seo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #910506;
+    color: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 35px;
+    width: 50%;
+    margin-bottom: 2rem;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+.seo-content__title,
+.seo-content__heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.seo-content__title {
+    margin-top: 0;
+}
+
+.seo-content__heading {
+    margin-top: 1.5rem;
+}
+
+.seo-content__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 0.5rem 0;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.seo-content__list {
+    margin: 0 0 0.5rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.7;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.seo-content__list li {
+    margin-bottom: 0.35rem;
+}
+
+.seo-content__faq {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.seo-content__details {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    margin-bottom: 0;
+}
+
+.seo-content__details:last-child {
+    border-bottom: none;
+}
+
+.seo-content__summary {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.85rem 0;
+    cursor: pointer;
+    list-style: none;
+    color: #ffffff;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.seo-content__summary::-webkit-details-marker {
+    display: none;
+}
+
+.seo-content__summary::before {
+    content: '+';
+    margin-right: 0.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.seo-content__details[open] .seo-content__summary::before {
+    content: '−';
+}
+
+.seo-content__summary:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.seo-content__details-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 0.75rem 0;
+    padding-left: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+    .seo-content {
+        width: 90%;
+        padding: 1.5rem 1.25rem;
     }
 }

@@ -40,10 +40,10 @@
         "@type": "WebSite",
         "name": "Carros do Brasil - Tabela FIPE",
         "url": "{{ $canonical }}",
-        "description": "{{ $description }}"
+        "description": "{{ $description }}",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://ilovecarros.com/resultado?brand={brand}&model_id={model_id}&year={year}",
+            "target": "{{ url('/resultado') }}?brand={brand}&model_id={model_id}&year={year}",
             "query-input": "required name=brand required name=model_id required name=year"
           }
     }
@@ -66,8 +66,7 @@
     <main class="container" role="main">
         <form action="{{ route('resultado') }}" method="GET" id="searchForm">
             <section class="search-section" id="commonSearchSection" aria-labelledby="search-title">
-                <h1 id="search-title">Consulta Tabela FIPE Atualizada</h1>
-                <h2>Preço de Carros Hoje</h2>
+                <h1 id="search-title">Consulta Tabela FIPE</h1>
 
                 @if(session('error'))
                     <p class="search-error" role="alert">{{ session('error') }}</p>
@@ -102,6 +101,44 @@
                 </div>
             </section>
         </form>
+
+        <section class="seo-content" aria-labelledby="seo-content-title">
+            <h2 id="seo-content-title" class="seo-content__title">O que é a Tabela FIPE?</h2>
+            <p class="seo-content__text">
+                A Tabela FIPE é uma referência nacional de preços médios de veículos no Brasil. Aqui você consulta o
+                preço FIPE por
+                marca, modelo e ano usando o mês de referência mais recente.
+            </p>
+
+            <h2 class="seo-content__heading">Para que serve o valor FIPE?</h2>
+            <p class="seo-content__text">
+                O valor FIPE é usado como base em negociações de compra e venda, avaliação de usados, seguros e
+                financiamentos.
+                Ele não é o “preço final” da loja, mas uma média de mercado.
+            </p>
+
+            <h2 class="seo-content__heading">Como consultar o preço FIPE no site</h2>
+            <ol class="seo-content__list">
+                <li>Selecione a marca do veículo.</li>
+                <li>Escolha o modelo.</li>
+                <li>Selecione o ano (e versão/combustível, quando aplicável).</li>
+                <li>Clique em <strong>PESQUISAR</strong> para ver o resultado.</li>
+            </ol>
+
+            <h2 class="seo-content__heading">Perguntas frequentes</h2>
+            <div class="seo-content__faq">
+                <details class="seo-content__details">
+                    <summary class="seo-content__summary">A Tabela FIPE muda todo mês?</summary>
+                    <p class="seo-content__details-text">Sim. Os valores são atualizados mensalmente. Por isso sempre
+                        mostramos o mês de referência da consulta.</p>
+                </details>
+                <details class="seo-content__details">
+                    <summary class="seo-content__summary">O valor FIPE é igual ao preço de venda?</summary>
+                    <p class="seo-content__details-text">Não necessariamente. O preço de venda pode variar por estado,
+                        conservação, quilometragem e demanda.</p>
+                </details>
+            </div>
+        </section>
     </main>
 </body>
 
