@@ -175,13 +175,18 @@
                 </div>
                 <div class="result-actions">
                     <a href="{{ url('/') }}" class="buttom-submit">REFAZER PESQUISA</a>
-                    <button type="button" onclick="window.print()" class="result-action-icon"
+                    {{-- <button type="button" onclick="window.print()" class="result-action-icon"
                         aria-label="Imprimir resultado" title="Imprimir">
                         <i class="fas fa-print" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" id="copyUrlBtn" class="result-action-icon" aria-label="Copiar URL"
-                        title="Copiar URL">
-                        <i class="fas fa-clipboard" aria-hidden="true"></i>
+                    </button> --}}
+                    <button type="button" id="shareUrlBtn" class="result-action-icon" aria-label="Compartilhar link"
+                        title="Compartilhar link"
+                        data-share-url="{{ $canonical }}"
+                        data-share-title="{{ $title }}"
+                        data-share-text="Confira o valor FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} - {{ $car['reference_month'] }}">
+                        <span class="result-action-icon__svg" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 12h3l3.5 6h3.5" /><path d="M17 6h-3.5l-3.5 6" /></svg>
+                        </span>
                     </button>
                 </div>
             @else
@@ -195,15 +200,62 @@
 
     @if(isset($car))
         <script>
-            document.getElementById('copyUrlBtn').addEventListener('click', function () {
-                navigator.clipboard.writeText('{{ $canonical }}').then(function () {
-                    var btn = document.getElementById('copyUrlBtn');
-                    var icon = btn.querySelector('i');
-                    var prevClass = icon.className;
-                    icon.className = 'fas fa-check';
-                    setTimeout(function () { icon.className = prevClass; }, 2000);
+            (function () {
+                var shareBtn = document.getElementById('shareUrlBtn');
+                if (!shareBtn) return;
+
+                var copySvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 12h3l3.5 6h3.5" /><path d="M17 6h-3.5l-3.5 6" /></svg>';
+                var checkSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                var span = shareBtn.querySelector('.result-action-icon__svg');
+
+                function showSuccess() {
+                    if (span) {
+                        span.innerHTML = checkSvg;
+                        setTimeout(function () { span.innerHTML = copySvg; }, 2000);
+                    }
+                }
+
+                shareBtn.addEventListener('click', function () {
+                    var url = shareBtn.getAttribute('data-share-url') || '{{ $canonical }}';
+                    var title = shareBtn.getAttribute('data-share-title') || document.title;
+                    var text = shareBtn.getAttribute('data-share-text') || '';
+
+                    if (navigator.share) {
+                        navigator.share({
+                            title: title,
+                            text: text,
+                            url: url
+                        }).then(function () {
+                            showSuccess();
+                        }).catch(function (err) {
+                            if (err.name !== 'AbortError') {
+                                fallbackCopy(url);
+                            }
+                        });
+                    } else {
+                        fallbackCopy(url);
+                    }
                 });
-            });
+
+                function fallbackCopy(url) {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(url).then(showSuccess);
+                    } else {
+                        var input = document.createElement('input');
+                        input.value = url;
+                        input.setAttribute('readonly', '');
+                        input.style.position = 'absolute';
+                        input.style.left = '-9999px';
+                        document.body.appendChild(input);
+                        input.select();
+                        try {
+                            document.execCommand('copy');
+                            showSuccess();
+                        } catch (e) {}
+                        document.body.removeChild(input);
+                    }
+                }
+            })();
         </script>
     @endif
 </body>
