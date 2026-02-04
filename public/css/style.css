@@ -204,6 +204,7 @@ body {
 .result-section .result-subtitle {
     margin: 10px 0;
     font-weight: bolder;
+    margin-top: 50px;
 }
 
 .result-section .result-subtitle {
@@ -322,7 +323,7 @@ body {
     background-color: #ffffff;
     padding: 15px;
     border-radius: 35px;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .container-padding {
