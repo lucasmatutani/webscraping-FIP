@@ -2,7 +2,11 @@
     $ano = isset($car) ? $car['year'] : null;
     $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']}" : 'Tabela FIPE';
     $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
-    $canonical = url()->current();
+    $canonical = route('resultado.slug', [
+        'brandSlug' => Str::slug($car['brand']),
+        'modelSlug' => Str::slug($car['model']),
+        'year' => $car['year'],
+    ]);
     $dataConsulta = isset($car) ? now()->format('d/m/Y') : '';
 @endphp
 <!DOCTYPE html>
@@ -44,42 +48,42 @@
 
     @if(isset($car))
         <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
-            "url": "{{ $canonical }}",
-            "image": "{{ asset('images/social_media.png') }}",
-            "brand": {
-                "@type": "Brand",
-                "name": "{{ $car['brand'] }}"
-            },
-            "description": "Valor FIPE de referência - {{ $car['reference_month'] }}",
-            "offers": {
-                "@type": "Offer",
-                "price": "{{ $car['value_schema'] }}",
-                "priceCurrency": "BRL",
-                "availability": "https://schema.org/InStock"
-            },
-            "additionalProperty": [
-                {
-                    "@type": "PropertyValue",
-                    "name": "Ano Modelo",
-                    "value": "{{ $ano }}"
+            {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
+                "url": "{{ $canonical }}",
+                "image": "{{ asset('images/social_media.png') }}",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "{{ $car['brand'] }}"
                 },
-                {
-                    "@type": "PropertyValue",
-                    "name": "Código FIPE",
-                    "value": "{{ $car['fipe_code'] }}"
+                "description": "Valor FIPE de referência - {{ $car['reference_month'] }}",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "{{ $car['value_schema'] }}",
+                    "priceCurrency": "BRL",
+                    "availability": "https://schema.org/InStock"
                 },
-                {
-                    "@type": "PropertyValue",
-                    "name": "Mês Referência",
-                    "value": "{{ $car['reference_month'] }}"
-                }
-            ]
-        }
-        </script>
+                "additionalProperty": [
+                    {
+                        "@type": "PropertyValue",
+                        "name": "Ano Modelo",
+                        "value": "{{ $ano }}"
+                    },
+                    {
+                        "@type": "PropertyValue",
+                        "name": "Código FIPE",
+                        "value": "{{ $car['fipe_code'] }}"
+                    },
+                    {
+                        "@type": "PropertyValue",
+                        "name": "Mês Referência",
+                        "value": "{{ $car['reference_month'] }}"
+                    }
+                ]
+            }
+            </script>
     @endif
 </head>
 
@@ -97,7 +101,8 @@
                     Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} – Valor Atualizado
                 </h1>
                 <p>Confira o valor de referência FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} para
-                    {{ $car['reference_month'] }}.</p>
+                    {{ $car['reference_month'] }}.
+                </p>
 
                 <p class="result-price" aria-label="Valor FIPE">{{ $car['value'] }}</p>
 
