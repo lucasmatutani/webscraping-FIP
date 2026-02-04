@@ -74,9 +74,14 @@ class FIPEController extends Controller
             return redirect('/')->with('error', 'Selecione modelo e ano para consultar.');
         }
 
+        $yearValue = preg_match('/^(\d+)/', $year, $m) ? (int) $m[1] : null;
+        if ($yearValue === null) {
+            return redirect('/')->with('error', 'Ano inválido.');
+        }
+
         $value = CarsValue::with('model.brand')
             ->where('model_id', $modelId)
-            ->where('year', $year)
+            ->where('year', $yearValue)
             ->first();
 
         if (!$value) {
@@ -85,8 +90,7 @@ class FIPEController extends Controller
 
         $brandSlug = Str::slug($value->model->brand->name ?? '');
         $modelSlug = Str::slug($value->model->name ?? '');
-        $yearRecord = Years::where('model_id', $value->model_id)->where('year', $value->year)->first();
-        $yearSegment = $yearRecord ? $value->year . '-' . $yearRecord->fuel_type : (string) $value->year;
+        $yearSegment = (string) $value->year;
 
         return redirect()->route('resultado.slug', [
             'brandSlug' => $brandSlug,
@@ -103,6 +107,14 @@ class FIPEController extends Controller
         $yearValue = preg_match('/^(\d+)/', $year, $m) ? (int) $m[1] : null;
         if ($yearValue === null) {
             return redirect('/')->with('error', 'Ano inválido.');
+        }
+
+        if ($year !== (string) $yearValue) {
+            return redirect()->route('resultado.slug', [
+                'brandSlug' => $brandSlug,
+                'modelSlug' => $modelSlug,
+                'year' => (string) $yearValue,
+            ], 301);
         }
 
         $brand = Brands::all()->first(function (Brands $b) use ($brandSlug) {

@@ -1,32 +1,72 @@
+@php
+    $title = 'Tabela FIPE Atualizada: Consulte o Preço de Carros por Marca, Modelo e Ano';
+    $description = 'Consulte a Tabela FIPE atualizada e veja o preço médio de carros por marca, modelo e ano. Resultado rápido com mês de referência e dados oficiais.';
+    $canonical = url('/');
+    $referenceMonthHuman = now()->locale('pt_BR')->translatedFormat('F \d\e Y');
+@endphp
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valores Tabela FIPE - Carros do Brasil</title>
-    <meta name="description"
-        content="Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil. Encontre preços, modelos e mais informações de forma rápida e precisa.">
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $description }}">
+    <link rel="canonical" href="{{ $canonical }}">
     <link rel="icon" href="{{ asset('images/icon_i_love_carros.png') }}">
 
-    {{-- <title>I ❤️ Carros</title> --}}
+    {{-- Open Graph --}}
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:site_name" content="Carros do Brasil - Tabela FIPE">
+    <meta property="og:image" content="{{ asset('images/social_media.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ asset('images/social_media.png') }}">
+    <meta name="twitter:image:width" content="1200">
+    <meta name="twitter:image:height" content="630">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Carros do Brasil - Tabela FIPE",
+        "url": "{{ $canonical }}",
+        "description": "{{ $description }}"
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://ilovecarros.com/resultado?brand={brand}&model_id={model_id}&year={year}",
+            "query-input": "required name=brand required name=model_id required name=year"
+          }
+    }
+    </script>
+
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     @vite(['resources/js/app.js'])
 </head>
 
 <body>
-    <div class="header">
-        <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Logo I Love Carros">
-    </div>
+    <header class="header" role="banner">
+        <a href="{{ url('/') }}" aria-label="Ir para página inicial - Consulta FIPE">
+            <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE">
+        </a>
+    </header>
 
-    <div class="container">
+    <main class="container" role="main">
         <form action="{{ route('resultado') }}" method="GET" id="searchForm">
-            <section class="search-section" id="commonSearchSection">
-                <h1>Consulta Tabela FIPE Atualizada</h1>
+            <section class="search-section" id="commonSearchSection" aria-labelledby="search-title">
+                <h1 id="search-title">Consulta Tabela FIPE Atualizada</h1>
                 <h2>Preço de Carros Hoje</h2>
 
                 @if(session('error'))
@@ -37,7 +77,7 @@
                     Sua pesquisa será realizada de acordo com o seguinte mês e ano
                     de referência:
                 </p>
-                <h2 id="currentDateCommon">Carregando data...</h2>
+                <h2 id="currentDateCommon">{{ $referenceMonthHuman }}</h2>
                 <p>
                     Primeiro, selecione a marca do seu carro. Depois, é só adicionar
                     o modelo e o ano.
@@ -62,7 +102,7 @@
                 </div>
             </section>
         </form>
-    </div>
+    </main>
 </body>
 
 </html>
