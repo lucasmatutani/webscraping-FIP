@@ -36,8 +36,14 @@ class GenerateSitemapJob implements ShouldQueue
         $seen = [];
         $urls = [];
 
+        // URL da home (sempre primeira no sitemap)
+        $urls[] = [
+            'loc' => $baseUrl . '/',
+            'lastmod' => $lastmod,
+            'changefreq' => 'monthly',
+        ];
+
         CarsValue::with('model.brand')
-            ->select('model_id', 'year')
             ->chunkById(1000, function ($items) use ($baseUrl, $lastmod, &$seen, &$urls) {
                 foreach ($items as $cv) {
                     $brandSlug = Str::slug($cv->model->brand->name ?? '');
