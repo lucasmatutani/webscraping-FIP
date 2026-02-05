@@ -271,7 +271,7 @@ body {
 
 .result-price {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 32px;
     font-weight: 700;
     color: #ffffff;
     margin: 25px 0 0 0;
@@ -280,23 +280,6 @@ body {
                  0 4px 12px rgba(0, 0, 0, 0.4),
                  0 0 20px rgba(0, 0, 0, 0.25);
     letter-spacing: 0.02em;
-}
-
-.result-price {
-    font-size: 32px !important;
-}
-
-@media (max-width: 450px) {
-    .result-price {
-        font-size: 1.75rem;
-        margin: 15px 0 0 0;
-    }
-
-    .result-action-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-    }
 }
 
 .result-actions {
@@ -477,6 +460,25 @@ body {
 
 /* Mobile Grande */
 @media (max-width: 450px) {
+    .result-price {
+        font-size: 1.5rem;
+        margin: 15px 0 0 0;
+    }
+
+    .container .result-price{
+        font-size: 1.2rem;
+    }
+
+    .result-action-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .container-result{
+        width: 85%;
+    }
+
     .container {
         display: flex;
         flex-direction: column;
@@ -485,11 +487,19 @@ body {
     }
 
     .container p {
-        font-size: 15px;
+        font-size: 0.9rem;
     }
 
     h1 {
+        font-size: 1.1rem;
+    }
+
+    h2{
         font-size: 1rem;
+    }
+
+    .result-section h2 {
+        margin-top: 20px;
     }
 
     .search-section h2 {
@@ -526,7 +536,7 @@ body {
 
     .container-values .label,
     .container-values .value {
-        font-size: 18px;
+        font-size: 0.9rem;
     }
 
     .search-form {
@@ -546,22 +556,21 @@ body {
         height: 40px;
     }
 
-    .container-values .label,
-    .container-values .value {
-        font-size: 14px;
-    }
-
     .container-values {
         margin-top: 33px;
     }
 
     .search-section,
     .result-section {
-        padding: 18px 18px;
-        width: 85%;
-        margin-bottom: 20px;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 0;
     }
 
+    .breadcrumb{
+        display: none;
+    }
 }
 
 /* Tablets e Small Desktops */
