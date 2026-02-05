@@ -125,10 +125,10 @@ class SelectManager {
 
         try {
             const years = await SelectService.fetchYears(modelId);
-            const yearChoices = years.map(year => ({
-                value: year.year,
-                label: `${year.year} - ${year.fuel_type}`
-            }));
+            const yearChoices = years.map(year => {
+                const label = year.year === 0 ? `0km` : `${year.year}`;
+                return { value: year.year, label };
+            });
 
             this.choices.year.setChoices(yearChoices, 'value', 'label', false);
             this.elements.year.disabled = false;

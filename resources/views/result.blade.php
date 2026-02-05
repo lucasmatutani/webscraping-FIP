@@ -1,5 +1,5 @@
 @php
-    $ano = isset($car) ? $car['year'] : null;
+    $ano = isset($car) ? ($car['year_display'] ?? $car['year']) : null;
     $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']} OFICIAL" : 'Tabela FIPE';
     $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor oficial atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
     $canonical = route('resultado.slug', [
@@ -16,6 +16,7 @@
     @if(!isset($car))
         <meta name="robots" content="noindex,follow">
     @endif
+    <meta name="robots" content="noindex,follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
@@ -118,17 +119,17 @@
             </nav>
             @if(isset($car))
                 <h1 id="result-title" class="result-title">
-                    Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} – Valor Atualizado
+                    Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} – Valor Atualizado
                 </h1>
-                <p>Confira o valor de referência FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} para
+                <p>Confira o valor de referência FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} para
                     {{ $car['reference_month'] }}.
                 </p>
 
                 <p class="result-price" aria-label="Valor FIPE">{{ $car['value'] }}</p>
 
-                <h2>Sobre o preço FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }}</h2>
+                <h2>Sobre o preço FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}</h2>
                 <p>
-                    O preço médio FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }}
+                    O preço médio FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}
                     em {{ $car['reference_month'] }} é de {{ $car['value'] }}.
                     Esse valor é usado como referência no mercado brasileiro.
                 </p>
@@ -161,7 +162,7 @@
 
                             <div class="container-values">
                                 <span class="label">Ano:</span>
-                                <span class="value">{{ $car['year'] }}</span>
+                                <span class="value">{{ $ano }}</span>
                             </div>
                             <span class="underline" aria-hidden="true"></span>
 
@@ -183,7 +184,7 @@
                         title="Compartilhar link"
                         data-share-url="{{ $canonical }}"
                         data-share-title="{{ $title }}"
-                        data-share-text="Confira o valor FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $car['year'] }} - {{ $car['reference_month'] }}">
+                        data-share-text="Confira o valor FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} - {{ $car['reference_month'] }}">
                         <span class="result-action-icon__svg" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 12h3l3.5 6h3.5" /><path d="M17 6h-3.5l-3.5 6" /></svg>
                         </span>

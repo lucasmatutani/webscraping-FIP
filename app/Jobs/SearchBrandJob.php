@@ -29,8 +29,8 @@ class SearchBrandJob implements ShouldQueue
      */
     public function handle(): void
     {
+        \Log::info('Iniciando SearchBrandJob');
         $client = new Client(); // Instanciar o GuzzleHttp Client
-
         try {
             $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarMarcas';
 

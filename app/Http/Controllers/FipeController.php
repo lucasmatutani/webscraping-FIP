@@ -148,6 +148,7 @@ class FIPEController extends Controller
             'reference_month' => $value->reference_month,
             'fipe_code' => $value->fipe_code,
             'year' => (string) $value->year,
+            'year_display' => $value->year == 0 ? '0km' : (string) $value->year,
             'model' => $value->model->name ?? 'N/A',
             'brand' => $value->model->brand->name ?? 'N/A',
         ];

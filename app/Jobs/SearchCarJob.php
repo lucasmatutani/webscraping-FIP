@@ -31,7 +31,7 @@ class SearchCarJob implements ShouldQueue
      */
     public function handle(): void
     {
-        \Log::info('Iniciando SearchBrandJob');
+        \Log::info('Iniciando SearchCarJob');
         $client = new Client();
         $brands = Brands::all();
 
@@ -42,44 +42,60 @@ class SearchCarJob implements ShouldQueue
                 $years = Years::where('model_id', $model->id)->get();
 
                 foreach ($years as $year) {
-                    try {
-                        $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarValorComTodosParametros';
-                        
-                        $formParams = [
-                            'form_params' => [
-                                'codigoTabelaReferencia' => 330,
-                                'codigoMarca' => $brand->fipe_id,
-                                'codigoModelo' => $model->fipe_id,
-                                'codigoTipoVeiculo' => 1,
-                                'anoModelo' => $year->year,
-                                'codigoTipoCombustivel' => $year->fuel_type,
-                                'tipoVeiculo' => 1,
-                                'tipoConsulta' => 'tradicional'
-                            ],
-                        ];
+                    $maxAttempts = 3;
+                    $attempt = 0;
+                    $success = false;
 
-                        $response = $client->request('POST', $url, $formParams);
-                        $carData = json_decode($response->getBody(), true);
-                        
-                        if(isset($carData["erro"])){
-                            \Log::error('Erro no SearchCarJob: brand ' . $brand->fipe_id . " model " . $model->fipe_id . " year: " . $year->year . "\n");
-                            continue;
+                    while (! $success && $attempt < $maxAttempts) {
+                        try {
+                            $attempt++;
+                            $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarValorComTodosParametros';
+
+                            $anoParaApi = $year->year === 0 ? 32000 : $year->year;
+
+                            $formParams = [
+                                'form_params' => [
+                                    'codigoTabelaReferencia' => 330,
+                                    'codigoMarca' => $brand->fipe_id,
+                                    'codigoModelo' => $model->fipe_id,
+                                    'codigoTipoVeiculo' => 1,
+                                    'anoModelo' => $anoParaApi,
+                                    'codigoTipoCombustivel' => $year->fuel_type,
+                                    'tipoVeiculo' => 1,
+                                    'tipoConsulta' => 'tradicional'
+                                ],
+                            ];
+
+                            $response = $client->request('POST', $url, $formParams);
+                            $carData = json_decode($response->getBody(), true);
+
+                            if (isset($carData['erro'])) {
+                                // API retorna "erro" para combinações inexistentes (ex.: ano 32000) – não é falha do job
+                                \Log::debug('SearchCarJob: sem valor FIPE para brand ' . $brand->fipe_id . ' model ' . $model->fipe_id . ' year ' . $year->year);
+                                $success = true;
+                                continue;
+                            }
+
+                            CarsValue::updateOrCreate(
+                                [
+                                    'fipe_code' => $carData['CodigoFipe'],
+                                    'model_id' => $model->id,
+                                    'year' => $year->year
+                                ],
+                                [
+                                    'value' => $carData['Valor'],
+                                    'reference_month' => $carData['MesReferencia']
+                                ]
+                            );
+                            $success = true;
+                            sleep(2);
+                        } catch (GuzzleException $e) {
+                            if ($attempt >= $maxAttempts) {
+                                \Log::error('SearchCarJob falhou após ' . $maxAttempts . ' tentativas: brand ' . $brand->fipe_id . ' model ' . $model->fipe_id . ' year ' . $year->year . ' – ' . $e->getMessage());
+                            } else {
+                                sleep(30);
+                            }
                         }
-
-                        CarsValue::updateOrCreate(
-                            [
-                                'fipe_code' => $carData['CodigoFipe'],
-                                'model_id' => $model->id,
-                                'year' => $year->year
-                            ],
-                            [
-                                'value' => $carData['Valor'],
-                                'reference_month' => $carData['MesReferencia']
-                            ]
-                        );
-                        sleep(5);
-                    } catch (GuzzleException $e) {
-                        \Log::error('Erro no SearchCarJob: ' . $e->getMessage());
                     }
                 }
             }

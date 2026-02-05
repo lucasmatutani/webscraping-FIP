@@ -51,8 +51,12 @@ class SearchYearJob implements ShouldQueue
 
                 foreach ($yearsData as $yearItem) {
                     preg_match('/^\d+/', $yearItem['Label'], $matches);
-                    $yearNumber = intval($matches[0]);
-                    $type = explode("-", $yearItem['Value']);
+                    $yearNumber = (int) ($matches[0] ?? 0);
+                    // FIPE usa 32000 para zero km; armazenamos como 0 para exibir "0km" no select
+                    if ($yearNumber === 32000) {
+                        $yearNumber = 0;
+                    }
+                    $type = explode('-', $yearItem['Value']);
 
                     Years::updateOrCreate(
                         ['year' => $yearNumber, 'fuel_type' => $type[1], 'model_id' => $model->id]
