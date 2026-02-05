@@ -385,6 +385,7 @@ body {
 
 .container-result {
     width: 60%;
+    text-align: left;
 }
 
 .container-table {

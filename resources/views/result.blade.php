@@ -1,7 +1,7 @@
 @php
     $ano = isset($car) ? $car['year'] : null;
-    $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']}" : 'Tabela FIPE';
-    $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
+    $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']} OFICIAL" : 'Tabela FIPE';
+    $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor oficial atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
     $canonical = route('resultado.slug', [
         'brandSlug' => Str::slug($car['brand']),
         'modelSlug' => Str::slug($car['model']),
@@ -58,7 +58,7 @@
                     "@type": "Brand",
                     "name": "{{ $car['brand'] }}"
                 },
-                "description": "Valor FIPE de referência - {{ $car['reference_month'] }}",
+                "description": "Valor FIPE OFICIAL de referência - {{ $car['reference_month'] }}",
                 "offers": {
                     "@type": "Offer",
                     "price": "{{ $car['value_schema'] }}",

@@ -1,6 +1,6 @@
 @php
-    $title = 'Tabela FIPE Atualizada: Consulte o Preço de Carros por Marca, Modelo e Ano';
-    $description = 'Consulte a Tabela FIPE atualizada e veja o preço médio de carros por marca, modelo e ano. Resultado rápido com mês de referência e dados oficiais.';
+    $title = 'Tabela FIPE OFICIAL: Consulte o Preço de Carros por Marca, Modelo e Ano';
+    $description = 'Consulte a Tabela FIPE oficial e veja o preço médio de carros por marca, modelo e ano. Resultado rápido com mês de referência e dados oficiais.';
     $canonical = url('/');
     $referenceMonthHuman = now()->locale('pt_BR')->translatedFormat('F \d\e Y');
 @endphp
@@ -38,7 +38,7 @@
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Carros do Brasil - Tabela FIPE",
+        "name": "Carros do Brasil - Tabela FIPE OFICIAL",
         "url": "{{ $canonical }}",
         "description": "{{ $description }}",
         "potentialAction": {
