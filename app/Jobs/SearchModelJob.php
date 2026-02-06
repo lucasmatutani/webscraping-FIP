@@ -11,7 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Jobs\SearchYearJob;
+use App\Jobs\SearchYearsForModelJob;
 
 class SearchModelJob implements ShouldQueue
 {
@@ -34,7 +34,7 @@ class SearchModelJob implements ShouldQueue
         $client = new Client();
         $brands = Brands::all();
 
-        foreach ($brands as $brand) { 
+        foreach ($brands as $brand) {
             try {
                 $url = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos';
 
@@ -67,7 +67,10 @@ class SearchModelJob implements ShouldQueue
                 \Log::error('Erro no SearchModelJob: ' . $e->getMessage());
             }
         }
-        dispatch(new SearchYearJob($this->codigoTabelaReferencia));
+
+        foreach (Models::pluck('id') as $modelId) {
+            dispatch(new SearchYearsForModelJob($modelId, $this->codigoTabelaReferencia));
+        }
     }
 }
 
