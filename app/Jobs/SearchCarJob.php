@@ -18,12 +18,11 @@ class SearchCarJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
+    private int $codigoTabelaReferencia;
+    
+    public function __construct(int $codigoTabelaReferencia = 330)
     {
-        // Parâmetros para o job, se necessário
+        $this->codigoTabelaReferencia = $codigoTabelaReferencia;
     }
 
     /**
@@ -100,6 +99,6 @@ class SearchCarJob implements ShouldQueue
                 }
             }
         }
-        \Log::info('Finalizando SearchBrandJob');
+        \Log::info('Finalizando SearchCarJob');
     }
 }

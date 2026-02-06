@@ -14,7 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->job(new SearchBrandJob())->monthlyOn(2, '00:00');
+        $codigoReferencia = $this->codigoTabelaReferenciaDoMes();
+
+        $schedule->job(new SearchBrandJob($codigoReferencia))->monthlyOn(2, '00:00');
         $schedule->job(new GenerateSitemapJob())->monthlyOn(6, '00:00');
     }
 
@@ -26,5 +28,12 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    private function codigoTabelaReferenciaDoMes(): int
+    {
+        $mesBase = 329;
+        $dataBase = now()->startOfMonth()->subMonths(2);
+        return $mesBase + now()->diffInMonths($dataBase);
     }
 }

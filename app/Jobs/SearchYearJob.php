@@ -18,9 +18,11 @@ class SearchYearJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct()
+    private int $codigoTabelaReferencia;
+    
+    public function __construct(int $codigoTabelaReferencia = 330)
     {
-        // Parâmetros para o job, se necessário
+        $this->codigoTabelaReferencia = $codigoTabelaReferencia;
     }
 
     public function handle(): void
@@ -67,6 +69,6 @@ class SearchYearJob implements ShouldQueue
                 \Log::error('Erro no SearchYearJob: ' . $e->getMessage());
             }
         }
-        dispatch(new SearchCarJob());
+        dispatch(new SearchCarJob($this->codigoTabelaReferencia));
     }
 }

@@ -16,12 +16,13 @@ class SearchBrandJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private int $codigoTabelaReferencia;
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct(int $codigoTabelaReferencia = 330)
     {
-        // Você pode passar parâmetros para o job, se necessário
+        $this->codigoTabelaReferencia = $codigoTabelaReferencia;
     }
 
     /**
@@ -50,7 +51,7 @@ class SearchBrandJob implements ShouldQueue
                 );
             }
             sleep(5);
-            dispatch(new SearchModelJob());
+            dispatch(new SearchModelJob($this->codigoTabelaReferencia));
         } catch (GuzzleException $e) {
             \Log::error('Erro no SearchBrandJob: ' . $e->getMessage());
         }

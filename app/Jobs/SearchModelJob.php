@@ -17,12 +17,13 @@ class SearchModelJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private int $codigoTabelaReferencia;
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct(int $codigoTabelaReferencia = 330)
     {
-        // Parâmetros para o job, se necessário
+        $this->codigoTabelaReferencia = $codigoTabelaReferencia;
     }
 
     /**
@@ -66,7 +67,7 @@ class SearchModelJob implements ShouldQueue
                 \Log::error('Erro no SearchModelJob: ' . $e->getMessage());
             }
         }
-        dispatch(new SearchYearJob());
+        dispatch(new SearchYearJob($this->codigoTabelaReferencia));
     }
 }
 

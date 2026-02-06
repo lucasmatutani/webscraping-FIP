@@ -427,184 +427,6 @@ body {
     border-right: 3px solid #000;
 }
 
-/* Mobile Pequeno */
-@media (max-width: 320px) {
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .search-section {
-        width: 75%;
-        margin: 0;
-    }
-
-    .header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .header img {
-        width: 60vw;
-        margin: 0 auto;
-        position: relative;
-        top: 0px;
-    }
-}
-
-/* Mobile Médio */
-@media (max-width: 375px) {}
-
-/* Mobile Grande */
-@media (max-width: 450px) {
-    .result-price {
-        font-size: 1.5rem;
-        margin: 15px 0 0 0;
-    }
-
-    .container .result-price{
-        font-size: 1.2rem;
-    }
-
-    .result-action-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-    }
-
-    .container-result{
-        width: 85%;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .container p {
-        font-size: 0.9rem;
-    }
-
-    h1 {
-        font-size: 1.1rem;
-    }
-
-    h2{
-        font-size: 1rem;
-    }
-
-    .result-section h2 {
-        margin-top: 20px;
-    }
-
-    .search-section h2 {
-        font-size: 1.5em;
-    }
-
-    .header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .header img {
-        width: 60vw;
-        margin: 0 auto;
-        position: relative;
-        top: 0px;
-    }
-
-    .search-buttons {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-    }
-
-    .search-buttons button {
-        font-size: 0.8em;
-        padding: 5px 5px;
-    }
-
-    .container-btn button {
-        font-size: 14px;
-    }
-
-    .container-values .label,
-    .container-values .value {
-        font-size: 0.9rem;
-    }
-
-    .search-form {
-        width: 100%;
-    }
-
-    .container-table {
-        padding: 10px;
-    }
-
-    .search-form label {
-        font-size: 16px;
-    }
-
-    .search-form select {
-        font-size: 16px;
-        height: 40px;
-    }
-
-    .container-values {
-        margin-top: 33px;
-    }
-
-    .search-section,
-    .result-section {
-        width: 100%;
-        margin: 0;
-        border-radius: 0;
-        padding: 0;
-    }
-
-    .breadcrumb{
-        display: none;
-    }
-}
-
-/* Tablets e Small Desktops */
-@media (max-width: 1024px) {}
-
-/* Desktops Médios */
-@media (min-width: 1025px) and (max-width: 1550px) {
-    .search-section {
-        width: 60%;
-    }
-
-    .result-section {
-        width: 60%;
-    }
-
-    .search-buttons button {
-        font-size: 0.95em;
-        padding: 15px 30px;
-    }
-
-    .container-btn button {
-        font-size: 16px;
-    }
-
-    .container-values .label,
-    .container-values .value {
-        font-size: 16px;
-    }
-
-    .container-values .label {
-        width: 34%;
-    }
-}
-
 /* SEO Content - alinhado ao design do site */
 .seo-content {
     display: flex;
@@ -710,9 +532,188 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-@media (max-width: 768px) {
-    .seo-content {
-        width: 90%;
-        padding: 1.5rem 1.25rem;
+/* Mobile Pequeno */
+@media (max-width: 320px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-section {
+        width: 75%;
+        margin: 0;
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header img {
+        width: 60vw;
+        margin: 0 auto;
+        position: relative;
+        top: 0px;
     }
 }
+
+/* Mobile Médio */
+@media (max-width: 375px) {}
+
+/* Mobile Grande */
+@media (max-width: 450px) {
+    .result-price {
+        font-size: 1.5rem;
+        margin: 15px 0 0 0;
+    }
+
+    .container .result-price{
+        font-size: 1.3rem;
+    }
+
+    .result-action-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .container-result{
+        width: 85%;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container p {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.1rem;
+    }
+
+    h2{
+        font-size: 1rem;
+    }
+
+    .result-section h2 {
+        margin-top: 30px;
+    }
+
+    .search-section h2 {
+        font-size: 1.5em;
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header img {
+        width: 60vw;
+        margin: 0 auto;
+        position: relative;
+        top: 0px;
+    }
+
+    .search-buttons {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .search-buttons button {
+        font-size: 0.8em;
+        padding: 5px 5px;
+    }
+
+    .container-btn button {
+        font-size: 14px;
+    }
+
+    .container-values .label,
+    .container-values .value {
+        font-size: 0.9rem;
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .container-table {
+        padding: 10px;
+    }
+
+    .search-form label {
+        font-size: 16px;
+    }
+
+    .search-form select {
+        font-size: 16px;
+        height: 40px;
+    }
+
+    .container-values {
+        margin-top: 33px;
+    }
+
+    .search-section,
+    .result-section {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 10px 10px;
+    }
+
+    .seo-content {
+        width: 100%;
+        border-radius: 0;
+        margin: 0;
+    }
+
+    .breadcrumb{
+        display: none;
+    }
+}
+
+/* Tablets e Small Desktops */
+@media (max-width: 1024px) {}
+
+/* Desktops Médios */
+@media (min-width: 1025px) and (max-width: 1550px) {
+    .search-section {
+        width: 60%;
+    }
+
+    .result-section {
+        width: 60%;
+    }
+
+    .search-buttons button {
+        font-size: 0.95em;
+        padding: 15px 30px;
+    }
+
+    .container-btn button {
+        font-size: 16px;
+    }
+
+    .container-values .label,
+    .container-values .value {
+        font-size: 16px;
+    }
+
+    .container-values .label {
+        width: 34%;
+    }
+}
+
+
