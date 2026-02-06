@@ -254,14 +254,16 @@ body {
 .result-section h1,
 .result-section .result-title {
     text-align: center;
-    margin: 0 0 10px 0;
+    margin: 30px 0 10px 0;
+    font-size: 1.7em;
 }
 
 .result-section h2,
 .result-section .result-subtitle {
     margin: 10px 0;
     font-weight: bolder;
-    margin-top: 50px;
+    margin-top: 35px;
+    font-size: 1.3em;
 }
 
 .result-section .result-subtitle {
@@ -269,17 +271,24 @@ body {
     opacity: 0.95;
 }
 
-.result-price {
+.container .result-price {
     text-align: center;
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
     color: #ffffff;
-    margin: 25px 0 0 0;
-    padding: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
-                 0 4px 12px rgba(0, 0, 0, 0.4),
-                 0 0 20px rgba(0, 0, 0, 0.25);
-    letter-spacing: 0.02em;
+    margin: 30px auto;
+    padding: 1.25rem 2rem;
+    max-width: fit-content;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5),
+                 0 4px 16px rgba(0, 0, 0, 0.4),
+                 0 0 24px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
 }
 
 .result-actions {
@@ -367,7 +376,7 @@ body {
 }
 
 .container-result {
-    width: 60%;
+    width: 95%;
     text-align: left;
 }
 
@@ -401,8 +410,7 @@ body {
 }
 
 .container-values .label {
-    width: 32%;
-    border-right: 3px solid #910506;
+    width: 40%;
     font-weight: bold;
 }
 
@@ -566,12 +574,14 @@ body {
 /* Mobile Grande */
 @media (max-width: 450px) {
     .result-price {
-        font-size: 1.5rem;
-        margin: 15px 0 0 0;
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin: 20px auto;
+        padding: 1rem 1.5rem;
     }
 
-    .container .result-price{
-        font-size: 1.3rem;
+    .container .result-price {
+        font-size: 1.5rem;
     }
 
     .result-action-icon {
@@ -677,6 +687,7 @@ body {
         width: 100%;
         border-radius: 0;
         margin: 0;
+        padding: 100px 2.5rem;
     }
 
     .breadcrumb{
