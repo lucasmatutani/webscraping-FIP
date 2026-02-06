@@ -41,7 +41,7 @@ class SearchModelJob implements ShouldQueue
                 $formParams = [
                     'form_params' => [
                         'codigoTipoVeiculo' => 1,
-                        'codigoTabelaReferencia' => 330,
+                        'codigoTabelaReferencia' => $this->codigoTabelaReferencia,
                         'codigoMarca' => $brand->fipe_id
                     ],
                 ];

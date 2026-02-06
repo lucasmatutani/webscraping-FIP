@@ -37,7 +37,7 @@ class SearchYearJob implements ShouldQueue
                 $formParams = [
                     'form_params' => [
                         'codigoTipoVeiculo' => 1,
-                        'codigoTabelaReferencia' => 330,
+                        'codigoTabelaReferencia' => $this->codigoTabelaReferencia,
                         'codigoModelo' => $model->fipe_id,
                         'codigoMarca' => $model->brand->fipe_id
                     ],
@@ -64,7 +64,7 @@ class SearchYearJob implements ShouldQueue
                         ['year' => $yearNumber, 'fuel_type' => $type[1], 'model_id' => $model->id]
                     );
                 }
-                sleep(5);
+                sleep(2);
             } catch (GuzzleException $e) {
                 \Log::error('Erro no SearchYearJob: ' . $e->getMessage());
             }
