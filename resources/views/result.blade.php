@@ -49,42 +49,42 @@
 
     @if(isset($car))
         <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "Product",
-                "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
-                "url": "{{ $canonical }}",
-                "image": "{{ asset('images/social_media.png') }}",
-                "brand": {
-                    "@type": "Brand",
-                    "name": "{{ $car['brand'] }}"
-                },
-                "description": "Valor FIPE OFICIAL de referência - {{ $car['reference_month'] }}",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "{{ $car['value_schema'] }}",
-                    "priceCurrency": "BRL",
-                    "availability": "https://schema.org/InStock"
-                },
-                "additionalProperty": [
-                    {
-                        "@type": "PropertyValue",
-                        "name": "Ano Modelo",
-                        "value": "{{ $ano }}"
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Product",
+                    "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
+                    "url": "{{ $canonical }}",
+                    "image": "{{ asset('images/social_media.png') }}",
+                    "brand": {
+                        "@type": "Brand",
+                        "name": "{{ $car['brand'] }}"
                     },
-                    {
-                        "@type": "PropertyValue",
-                        "name": "Código FIPE",
-                        "value": "{{ $car['fipe_code'] }}"
+                    "description": "Valor FIPE OFICIAL de referência - {{ $car['reference_month'] }}",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "{{ $car['value_schema'] }}",
+                        "priceCurrency": "BRL",
+                        "availability": "https://schema.org/InStock"
                     },
-                    {
-                        "@type": "PropertyValue",
-                        "name": "Mês Referência",
-                        "value": "{{ $car['reference_month'] }}"
-                    }
-                ]
-            }
-            </script>
+                    "additionalProperty": [
+                        {
+                            "@type": "PropertyValue",
+                            "name": "Ano Modelo",
+                            "value": "{{ $ano }}"
+                        },
+                        {
+                            "@type": "PropertyValue",
+                            "name": "Código FIPE",
+                            "value": "{{ $car['fipe_code'] }}"
+                        },
+                        {
+                            "@type": "PropertyValue",
+                            "name": "Mês Referência",
+                            "value": "{{ $car['reference_month'] }}"
+                        }
+                    ]
+                }
+                </script>
     @endif
 </head>
 
@@ -97,105 +97,115 @@
 
     <main class="container" role="main">
         <section class="result-section" aria-labelledby="result-title">
-            <nav class="result-section__breadcrumb" aria-label="Breadcrumb">
-                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="{{ url('/') }}"><span itemprop="name">Início</span></a>
-                        <meta itemprop="position" content="1" />
-                    </li>
-                    @if(isset($car))
-                    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <link itemprop="item" href="{{ $canonical }}">
-                        <span itemprop="name">{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}</span>
-                        <meta itemprop="position" content="2" />
-                    </li>
-                    @else
-                    <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <span itemprop="name">Nenhum valor encontrado</span>
-                        <meta itemprop="position" content="2" />
-                    </li>
-                    @endif
-                </ol>
-            </nav>
-            @if(isset($car))
-                <h1 id="result-title" class="result-title">
-                    Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} – Valor Atualizado
-                </h1>
-                <p>Confira o valor de referência FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} para
-                    {{ $car['reference_month'] }}.
-                </p>
+            <div class="result-section-container">
+                <nav class="result-section__breadcrumb" aria-label="Breadcrumb">
+                    <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li class="breadcrumb__item" itemprop="itemListElement" itemscope
+                            itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="{{ url('/') }}"><span itemprop="name">Início</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
+                        @if(isset($car))
+                            <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope
+                                itemtype="https://schema.org/ListItem">
+                                <link itemprop="item" href="{{ $canonical }}">
+                                <span itemprop="name">{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}</span>
+                                <meta itemprop="position" content="2" />
+                            </li>
+                        @else
+                            <li class="breadcrumb__item breadcrumb__item--current" itemprop="itemListElement" itemscope
+                                itemtype="https://schema.org/ListItem">
+                                <span itemprop="name">Nenhum valor encontrado</span>
+                                <meta itemprop="position" content="2" />
+                            </li>
+                        @endif
+                    </ol>
+                </nav>
+                @if(isset($car))
+                    <h1 id="result-title" class="result-title">
+                        Preço {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} – Valor Atualizado
+                    </h1>
+                    <p>Confira o valor de referência FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} para
+                        {{ $car['reference_month'] }}.
+                    </p>
 
-                <p class="result-price" aria-label="Valor FIPE">{{ $car['value'] }}</p>
+                    <p class="result-price" aria-label="Valor FIPE">{{ $car['value'] }}</p>
 
-                <h2>Sobre o preço FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}</h2>
-                <p>
-                    O preço médio FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}
-                    em {{ $car['reference_month'] }} é de {{ $car['value'] }}.
-                    Esse valor é usado como referência no mercado brasileiro.
-                </p>
-                <div class="container-result">
-                    <div class="container-table">
-                        <div class="container-padding">
-                            <div class="container-values">
-                                <span class="label">Mês Referência:</span>
-                                <span class="value">{{ $car['reference_month'] }}</span>
+                    <h2>Sobre o preço FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}</h2>
+                    <p>
+                        O preço médio FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}
+                        em {{ $car['reference_month'] }} é de {{ $car['value'] }}.
+                        Esse valor é usado como referência no mercado brasileiro.
+                    </p>
+                    <div class="container-result">
+                        <div class="container-table">
+                            <div class="container-padding">
+                                <div class="container-values">
+                                    <span class="label">Mês Referência:</span>
+                                    <span class="value">{{ $car['reference_month'] }}</span>
+                                </div>
+                                <span class="underline" aria-hidden="true"></span>
+
+                                <div class="container-values">
+                                    <span class="label">Código FIPE:</span>
+                                    <span class="value">{{ $car['fipe_code'] }}</span>
+                                </div>
+                                <span class="underline" aria-hidden="true"></span>
+
+                                <div class="container-values">
+                                    <span class="label">Marca:</span>
+                                    <span class="value">{{ $car['brand'] }}</span>
+                                </div>
+                                <span class="underline" aria-hidden="true"></span>
+
+                                <div class="container-values">
+                                    <span class="label">Modelo:</span>
+                                    <span class="value">{{ $car['model'] }}</span>
+                                </div>
+                                <span class="underline" aria-hidden="true"></span>
+
+                                <div class="container-values">
+                                    <span class="label">Ano:</span>
+                                    <span class="value">{{ $ano }}</span>
+                                </div>
+                                <span class="underline" aria-hidden="true"></span>
+
+                                <div class="container-values">
+                                    <span class="label">Data da consulta:</span>
+                                    <span class="value">{{ $dataConsulta }}</span>
+                                </div>
+                                <span class="underline" aria-hidden="true"></span>
                             </div>
-                            <span class="underline" aria-hidden="true"></span>
-
-                            <div class="container-values">
-                                <span class="label">Código FIPE:</span>
-                                <span class="value">{{ $car['fipe_code'] }}</span>
-                            </div>
-                            <span class="underline" aria-hidden="true"></span>
-
-                            <div class="container-values">
-                                <span class="label">Marca:</span>
-                                <span class="value">{{ $car['brand'] }}</span>
-                            </div>
-                            <span class="underline" aria-hidden="true"></span>
-
-                            <div class="container-values">
-                                <span class="label">Modelo:</span>
-                                <span class="value">{{ $car['model'] }}</span>
-                            </div>
-                            <span class="underline" aria-hidden="true"></span>
-
-                            <div class="container-values">
-                                <span class="label">Ano:</span>
-                                <span class="value">{{ $ano }}</span>
-                            </div>
-                            <span class="underline" aria-hidden="true"></span>
-
-                            <div class="container-values">
-                                <span class="label">Data da consulta:</span>
-                                <span class="value">{{ $dataConsulta }}</span>
-                            </div>
-                            <span class="underline" aria-hidden="true"></span>
                         </div>
                     </div>
-                </div>
-                <div class="result-actions">
-                    <a href="{{ url('/') }}" class="buttom-submit">REFAZER PESQUISA</a>
-                    {{-- <button type="button" onclick="window.print()" class="result-action-icon"
-                        aria-label="Imprimir resultado" title="Imprimir">
-                        <i class="fas fa-print" aria-hidden="true"></i>
-                    </button> --}}
-                    <button type="button" id="shareUrlBtn" class="result-action-icon" aria-label="Compartilhar link"
-                        title="Compartilhar link"
-                        data-share-url="{{ $canonical }}"
-                        data-share-title="{{ $title }}"
-                        data-share-text="Confira o valor FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} - {{ $car['reference_month'] }}">
-                        <span class="result-action-icon__svg" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 12h3l3.5 6h3.5" /><path d="M17 6h-3.5l-3.5 6" /></svg>
-                        </span>
-                    </button>
-                </div>
-            @else
-                <h1 id="result-title" class="result-title">Nenhum valor encontrado</h1>
-                <p>Não foi possível encontrar o valor FIPE para a combinação selecionada.</p>
-                <a href="{{ url('/') }}" class="buttom-submit"
-                    style="text-decoration: none; display: inline-block; margin-top: 20px;">NOVA PESQUISA</a>
-            @endif
+                    <div class="result-actions">
+                        <a href="{{ url('/') }}" class="buttom-submit">REFAZER PESQUISA</a>
+                        {{-- <button type="button" onclick="window.print()" class="result-action-icon"
+                            aria-label="Imprimir resultado" title="Imprimir">
+                            <i class="fas fa-print" aria-hidden="true"></i>
+                        </button> --}}
+                        <button type="button" id="shareUrlBtn" class="result-action-icon" aria-label="Compartilhar link"
+                            title="Compartilhar link" data-share-url="{{ $canonical }}" data-share-title="{{ $title }}"
+                            data-share-text="Confira o valor FIPE do {{ $car['brand'] }} {{ $car['model'] }} {{ $ano }} - {{ $car['reference_month'] }}">
+                            <span class="result-action-icon__svg" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M19 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M5 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M7 12h3l3.5 6h3.5" />
+                                    <path d="M17 6h-3.5l-3.5 6" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                @else
+                    <h1 id="result-title" class="result-title">Nenhum valor encontrado</h1>
+                    <p>Não foi possível encontrar o valor FIPE para a combinação selecionada.</p>
+                    <a href="{{ url('/') }}" class="buttom-submit"
+                        style="text-decoration: none; display: inline-block; margin-top: 20px;">NOVA PESQUISA</a>
+                @endif
+            </div>
         </section>
     </main>
 
@@ -252,7 +262,7 @@
                         try {
                             document.execCommand('copy');
                             showSuccess();
-                        } catch (e) {}
+                        } catch (e) { }
                         document.body.removeChild(input);
                     }
                 }

@@ -255,7 +255,7 @@ body {
 .result-section .result-title {
     text-align: center;
     margin: 30px 0 10px 0;
-    font-size: 1.7em;
+    font-size: 1.4em;
 }
 
 .result-section h2,
@@ -591,7 +591,7 @@ body {
     }
 
     .container-result{
-        width: 85%;
+        width: 95%;
     }
 
     .container {
@@ -620,6 +620,15 @@ body {
     .search-section h2 {
         font-size: 1.5em;
     }
+
+    .result-section-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+    
 
     .header {
         display: flex;
@@ -675,12 +684,18 @@ body {
         margin-top: 33px;
     }
 
-    .search-section,
-    .result-section {
+    .search-section {
         width: 100%;
         margin: 0;
         border-radius: 0;
         padding: 10px 10px;
+    }
+
+    .result-section {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 0;
     }
 
     .seo-content {

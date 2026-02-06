@@ -17,8 +17,6 @@ class SearchYearsForModelJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public int $timeout = 120;
-
     public function __construct(
         private int $modelId,
         private int $codigoTabelaReferencia = 330
