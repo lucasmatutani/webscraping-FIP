@@ -1,2 +1,8 @@
 User-agent: *
-Disallow: /
+Disallow: /api/
+Disallow: /resultado?
+Disallow: /*?*
+
+Allow: /
+
+Sitemap: https://ilovecarros.com/sitemap.xml

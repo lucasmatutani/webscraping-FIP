@@ -16,7 +16,6 @@
     @if(!isset($car))
         <meta name="robots" content="noindex,follow">
     @endif
-    <meta name="robots" content="noindex,follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
