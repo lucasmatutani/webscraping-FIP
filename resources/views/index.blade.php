@@ -34,6 +34,8 @@
     <meta name="twitter:image:width" content="1200">
     <meta name="twitter:image:height" content="630">
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
+     crossorigin="anonymous"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
