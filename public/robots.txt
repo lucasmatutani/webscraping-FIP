@@ -2,7 +2,14 @@ User-agent: *
 Disallow: /api/
 Disallow: /resultado?
 Disallow: /*?*
+Allow: /ads.txt
 
 Allow: /
 
-Sitemap: https://ilovecarros.com/sitemap.xml
+User-agent: Mediapartners-Google
+Allow: /ads.txt
+
+User-agent: Google-Display-Ads-Bot
+Allow: /ads.txt
+
+Sitemap: https://ilovecarros.com.br/sitemap.xml
