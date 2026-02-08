@@ -19,10 +19,9 @@
             <a href="{{ route('termos-de-uso') }}" class="footer__link footer-component__link">Termos de Uso</a>
         </nav>
         <p class="footer__copyright footer-component__copyright">
-            &copy; {{ date('Y') }} Carros do Brasil - Tabela FIPE.
+            Consulta gratuita da Tabela FIPE de carros, motos e caminhões no Brasil, com valores atualizados mensalmente para compra, venda e avaliação de veículos.
         </p>
         <p class="footer__disclaimer footer-component__disclaimer">
-            Valores oficiais da Tabela FIPE.
-        </p>
+            Este site não possui vínculo com a FIPE ou com a Fundação Instituto de Pesquisas Econômicas. Os valores apresentados são apenas para referência e podem variar conforme o mercado.        </p>
     </div>
 </footer>
