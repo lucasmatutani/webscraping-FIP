@@ -19,7 +19,7 @@
             <a href="{{ route('termos-de-uso') }}" class="footer__link footer-component__link">Termos de Uso</a>
         </nav>
         <p class="footer__copyright footer-component__copyright">
-            &copy; {{ date('Y') }} Carros do Brasil - Tabela FIPE. Valores de referência.
+            &copy; {{ date('Y') }} Carros do Brasil - Tabela FIPE.
         </p>
         <p class="footer__disclaimer footer-component__disclaimer">
             Valores oficiais da Tabela FIPE.
