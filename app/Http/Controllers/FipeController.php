@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class FIPEController extends Controller
+class FipeController extends Controller
 {
     public function getBrands()
     {
@@ -63,7 +63,7 @@ class FIPEController extends Controller
 }
 
     /**
-     * Exibe a página de resultado da consulta FIPE (server-side para SEO).
+     * Exibe a página de resultado da consulta Fipe (server-side para SEO).
      */
     public function showResult(Request $request)
     {
@@ -157,7 +157,7 @@ class FIPEController extends Controller
     }
 
     /**
-     * Normaliza o valor FIPE para o formato numérico do Schema.org (ex.: 125000.00).
+     * Normaliza o valor Fipe para o formato numérico do Schema.org (ex.: 125000.00).
      * Formato brasileiro: vírgula = decimal, ponto = milhar (ex.: R$ 125.000,00).
      */
     private function normalizePriceForSchema(string $value): string

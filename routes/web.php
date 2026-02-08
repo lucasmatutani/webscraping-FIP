@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FIPEController;
+use App\Http\Controllers\FipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +14,13 @@ use App\Http\Controllers\FIPEController;
 |
 */
 
-Route::get('/api/brands', [FIPEController::class, 'getBrands']);
-Route::get('/api/models/{brandId}', [FIPEController::class, 'getModels']);
-Route::get('/api/years/{modelId}', [FIPEController::class, 'getYears']);
-Route::get('/api/value', [FIPEController::class, 'getCarValue']);
+Route::get('/api/brands', [FipeController::class, 'getBrands']);
+Route::get('/api/models/{brandId}', [FipeController::class, 'getModels']);
+Route::get('/api/years/{modelId}', [FipeController::class, 'getYears']);
+Route::get('/api/value', [FipeController::class, 'getCarValue']);
 
-Route::get('/resultado', [FIPEController::class, 'showResult'])->name('resultado');
-Route::get('/resultado/{brandSlug}/{modelSlug}/{year}', [FIPEController::class, 'showResultBySlug'])
+Route::get('/resultado', [FipeController::class, 'showResult'])->name('resultado');
+Route::get('/resultado/{brandSlug}/{modelSlug}/{year}', [FipeController::class, 'showResultBySlug'])
     ->where(['brandSlug' => '[a-z0-9\-]+', 'modelSlug' => '[a-z0-9\-]+', 'year' => '[0-9\-]+'])
     ->name('resultado.slug');
 
