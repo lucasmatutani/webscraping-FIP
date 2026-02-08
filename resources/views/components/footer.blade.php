@@ -22,7 +22,7 @@
             &copy; {{ date('Y') }} Carros do Brasil - Tabela FIPE. Valores de referência.
         </p>
         <p class="footer__disclaimer footer-component__disclaimer">
-            Os valores exibidos têm caráter unicamente informativo e não substituem consulta oficial à Fundação Instituto de Pesquisas Econômicas (FIPE).
+            Valores oficiais da Tabela FIPE.
         </p>
     </div>
 </footer>
