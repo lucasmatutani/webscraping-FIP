@@ -85,7 +85,7 @@
                 </p>
                 <div class="search-form">
                     <label for="brandSelect">Marca:</label>
-                    <select id="brandSelect" name="brand" style="width: 100%;" aria-label="Selecione a marca">
+                    <select id="brandSelect" name="brand" style="width: 100%;" aria-label="Selecione a marca" required>
                         <option value="">Selecione ou digite a marca</option>
                     </select>
 
