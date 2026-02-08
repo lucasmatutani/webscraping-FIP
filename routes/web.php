@@ -31,3 +31,7 @@ Route::get('/', function () {
 Route::get('/politica-de-privacidade', function () {
     return view('politica-privacidade');
 })->name('politica-privacidade');
+
+Route::get('/termos-de-uso', function () {
+    return view('termos-de-uso');
+})->name('termos-de-uso');

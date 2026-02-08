@@ -15,6 +15,8 @@
             <a href="{{ url('/') }}" class="footer__link footer-component__link">Consulta Tabela FIPE</a>
             <span class="footer-component__separator" aria-hidden="true">|</span>
             <a href="{{ route('politica-privacidade') }}" class="footer__link footer-component__link">Política de Privacidade</a>
+            <span class="footer-component__separator" aria-hidden="true">|</span>
+            <a href="{{ route('termos-de-uso') }}" class="footer__link footer-component__link">Termos de Uso</a>
         </nav>
         <p class="footer__copyright footer-component__copyright">
             &copy; {{ date('Y') }} Carros do Brasil - Tabela FIPE. Valores de referência.
