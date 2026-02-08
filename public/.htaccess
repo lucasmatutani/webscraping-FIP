@@ -6,6 +6,10 @@
     RewriteEngine On
     RewriteBase /
 
+    # Redirect 301: www para não-www
+    RewriteCond %{HTTP_HOST} ^www\.ilovecarros\.com\.br$ [NC]
+    RewriteRule ^(.*)$ https://ilovecarros.com.br/$1 [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
