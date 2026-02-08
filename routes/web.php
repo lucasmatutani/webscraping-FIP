@@ -27,3 +27,7 @@ Route::get('/resultado/{brandSlug}/{modelSlug}/{year}', [FIPEController::class, 
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/politica-de-privacidade', function () {
+    return view('politica-privacidade');
+})->name('politica-privacidade');

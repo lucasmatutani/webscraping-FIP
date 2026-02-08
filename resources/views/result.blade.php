@@ -211,6 +211,8 @@
         </section>
     </main>
 
+    <x-footer />
+
     @if(isset($car))
         <script>
             (function () {
