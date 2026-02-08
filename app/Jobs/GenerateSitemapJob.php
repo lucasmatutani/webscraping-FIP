@@ -43,6 +43,18 @@ class GenerateSitemapJob implements ShouldQueue
             'changefreq' => 'monthly',
         ];
 
+        // Páginas estáticas
+        $urls[] = [
+            'loc' => $baseUrl . '/politica-de-privacidade',
+            'lastmod' => $lastmod,
+            'changefreq' => 'yearly',
+        ];
+        $urls[] = [
+            'loc' => $baseUrl . '/termos-de-uso',
+            'lastmod' => $lastmod,
+            'changefreq' => 'yearly',
+        ];
+
         CarsValue::with('model.brand')
             ->chunkById(1000, function ($items) use ($baseUrl, $lastmod, &$seen, &$urls) {
                 foreach ($items as $cv) {
