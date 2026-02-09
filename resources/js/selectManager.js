@@ -1,5 +1,7 @@
 // selectManager.js
 
+import Choices from 'choices.js';
+
 class SelectService {
     static async fetchBrands() {
         try {

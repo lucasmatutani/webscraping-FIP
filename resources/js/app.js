@@ -1,4 +1,5 @@
 // Importa o bootstrap.js para configuração global antes dos outros módulos
+import 'choices.js/public/assets/styles/choices.min.css';
 import './bootstrap';
 import './carSearch';
 import './selectManager';
