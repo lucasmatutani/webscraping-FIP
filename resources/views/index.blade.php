@@ -51,6 +51,9 @@
     }
     </script>
 
+    {{-- Preload do logo (LCP) para reduzir tempo de carregamento --}}
+    <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.png') }}">
+
     {{-- Preconnect para reduzir latência do Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +70,7 @@
 <body>
     <header class="header" role="banner">
         <a href="{{ url('/') }}" aria-label="Ir para página inicial - Consulta FIPE">
-            <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE">
+            <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" width="350" height="70" fetchpriority="high" loading="eager">
         </a>
     </header>
 
