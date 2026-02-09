@@ -52,7 +52,7 @@
     </script>
 
     {{-- Preload do logo (LCP) para reduzir tempo de carregamento --}}
-    <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.png') }}">
+    <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.png') }}" fetchpriority="high">
 
     {{-- Preconnect para reduzir latência do Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
