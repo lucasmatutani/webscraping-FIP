@@ -161,7 +161,9 @@ class SelectManager {
 // Exporta para uso global
 window.SelectManager = SelectManager;
 
-// Inicializa quando o DOM estiver pronto
+// Inicializa apenas na página que tem o formulário de busca (evita erro em result, termos, etc.)
 document.addEventListener('DOMContentLoaded', () => {
-    new SelectManager();
+    if (document.getElementById('brandSelect')) {
+        new SelectManager();
+    }
 });
