@@ -97,7 +97,10 @@
 <body>
     <header class="header" role="banner">
         <a href="{{ url('/') }}" aria-label="Voltar para consulta FIPE">
-            <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" fetchpriority="high" loading="eager">
+            <picture>
+                <source srcset="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp">
+                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" fetchpriority="high" loading="eager">
+            </picture>
         </a>
     </header>
 
