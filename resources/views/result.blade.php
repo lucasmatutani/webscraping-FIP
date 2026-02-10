@@ -72,17 +72,7 @@
                             "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
                             "url": "{{ $canonical }}",
                             "image": "{{ asset('images/social_media.png') }}",
-                            "brand": {
-                                "@type": "Brand",
-                                "name": "{{ $car['brand'] }}"
-                            },
                             "description": "Valor FIPE Atualizado de referência - {{ $car['reference_month'] }}",
-                            "offers": {
-                                "@type": "Offer",
-                                "price": "{{ $car['value_schema'] }}",
-                                "priceCurrency": "BRL",
-                                "availability": "https://schema.org/InStock"
-                            },
                             "additionalProperty": [
                                 {
                                     "@type": "PropertyValue",
