@@ -1,6 +1,10 @@
 @php
+    if (!isset($car)) {
+        redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.')->send();
+        exit;
+    }
     $ano = isset($car) ? ($car['year_display'] ?? $car['year']) : null;
-    $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']} OFICIAL" : 'Tabela FIPE';
+    $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']}" : 'Tabela FIPE';
     $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor oficial atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
     $canonical = route('resultado.slug', [
         'brandSlug' => Str::slug($car['brand']),
@@ -45,52 +49,59 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="{{ asset('css/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('css/style.css') }}"></noscript>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap">
+    </noscript>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
-     crossorigin="anonymous"></script>
+    @if(isset($car))
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
+            crossorigin="anonymous"></script>
+    @endif
     @vite(['resources/js/app.js'])
 
     @if(isset($car))
         <script type="application/ld+json">
-                {
-                    "@context": "https://schema.org",
-                    "@type": "Product",
-                    "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
-                    "url": "{{ $canonical }}",
-                    "image": "{{ asset('images/social_media.png') }}",
-                    "brand": {
-                        "@type": "Brand",
-                        "name": "{{ $car['brand'] }}"
-                    },
-                    "description": "Valor FIPE OFICIAL de referência - {{ $car['reference_month'] }}",
-                    "offers": {
-                        "@type": "Offer",
-                        "price": "{{ $car['value_schema'] }}",
-                        "priceCurrency": "BRL",
-                        "availability": "https://schema.org/InStock"
-                    },
-                    "additionalProperty": [
                         {
-                            "@type": "PropertyValue",
-                            "name": "Ano Modelo",
-                            "value": "{{ $ano }}"
-                        },
-                        {
-                            "@type": "PropertyValue",
-                            "name": "Código FIPE",
-                            "value": "{{ $car['fipe_code'] }}"
-                        },
-                        {
-                            "@type": "PropertyValue",
-                            "name": "Mês Referência",
-                            "value": "{{ $car['reference_month'] }}"
+                            "@context": "https://schema.org",
+                            "@type": "WebPage",
+                            "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
+                            "url": "{{ $canonical }}",
+                            "image": "{{ asset('images/social_media.png') }}",
+                            "brand": {
+                                "@type": "Brand",
+                                "name": "{{ $car['brand'] }}"
+                            },
+                            "description": "Valor FIPE Atualizado de referência - {{ $car['reference_month'] }}",
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "{{ $car['value_schema'] }}",
+                                "priceCurrency": "BRL",
+                                "availability": "https://schema.org/InStock"
+                            },
+                            "additionalProperty": [
+                                {
+                                    "@type": "PropertyValue",
+                                    "name": "Ano Modelo",
+                                    "value": "{{ $ano }}"
+                                },
+                                {
+                                    "@type": "PropertyValue",
+                                    "name": "Código FIPE",
+                                    "value": "{{ $car['fipe_code'] }}"
+                                },
+                                {
+                                    "@type": "PropertyValue",
+                                    "name": "Mês Referência",
+                                    "value": "{{ $car['reference_month'] }}"
+                                }
+                            ]
                         }
-                    ]
-                }
-                </script>
+                        </script>
     @endif
 </head>
 
@@ -99,7 +110,8 @@
         <a href="{{ url('/') }}" aria-label="Voltar para consulta FIPE">
             <picture>
                 <source srcset="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp">
-                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" fetchpriority="high" loading="eager">
+                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE"
+                    fetchpriority="high" loading="eager">
             </picture>
         </a>
     </header>
@@ -208,14 +220,99 @@
                             </span>
                         </button>
                     </div>
-                @else
-                    <h1 id="result-title" class="result-title">Nenhum valor encontrado</h1>
-                    <p>Não foi possível encontrar o valor FIPE para a combinação selecionada.</p>
-                    <a href="{{ url('/') }}" class="buttom-submit"
-                        style="text-decoration: none; display: inline-block; margin-top: 20px;">NOVA PESQUISA</a>
                 @endif
             </div>
         </section>
+        <section class="seo-content" aria-labelledby="interpretacao-title">
+            <h2 id="interpretacao-title" class="seo-content__heading">O que significa o valor FIPE?</h2>
+
+            <p class="seo-content__text">
+                O valor FIPE é uma <strong>referência de preço médio</strong> usada no Brasil para orientar negociações
+                e avaliações
+                de veículos. Ele ajuda a ter uma base para compra e venda, mas <strong>não representa obrigatoriamente o
+                    preço final</strong>
+                que você vai pagar ou receber em uma negociação.
+            </p>
+
+            <p class="seo-content__text">
+                <strong>Transparência:</strong> este site é um projeto independente e não possui vínculo com a FIPE
+                (Fundação Instituto de Pesquisas Econômicas). Os valores exibidos são usados como referência e podem
+                variar conforme o mercado.
+            </p>
+        </section>
+        <section class="seo-content" aria-labelledby="variacao-title">
+            <h2 id="variacao-title" class="seo-content__heading">Por que o preço pode variar em relação à FIPE?</h2>
+          
+            <p class="seo-content__text">
+              Mesmo com a FIPE como referência, o preço de mercado pode ficar acima ou abaixo dependendo de vários fatores.
+              Use o valor FIPE como ponto de partida e ajuste sua expectativa conforme a realidade do veículo.
+            </p>
+          
+            <ul class="seo-content__list">
+              <li><strong>Estado de conservação:</strong> funilaria, pintura, interior e histórico de manutenção.</li>
+              <li><strong>Quilometragem:</strong> veículos com baixa km tendem a valer mais.</li>
+              <li><strong>Região e demanda:</strong> preços variam por cidade/estado e sazonalidade.</li>
+              <li><strong>Versão e itens:</strong> opcionais, pacote de tecnologia, multimídia, rodas, etc.</li>
+              <li><strong>Histórico:</strong> sinistro, leilão, restrições e documentação impactam bastante.</li>
+            </ul>
+          </section>
+          <section class="seo-content" aria-labelledby="usar-title">
+            <h2 id="usar-title" class="seo-content__heading">Como usar o valor FIPE na prática</h2>
+          
+            <p class="seo-content__text">
+              O valor FIPE é muito útil para tomar decisões com mais segurança. Abaixo estão usos comuns no dia a dia:
+            </p>
+          
+            <ul class="seo-content__list">
+              <li><strong>Compra:</strong> compare o preço anunciado com a FIPE e negocie com base em conservação e histórico.</li>
+              <li><strong>Venda:</strong> use a FIPE como referência e justifique diferença (opcionais, estado, revisões).</li>
+              <li><strong>Seguro:</strong> muitas seguradoras usam FIPE como referência de indenização (pode variar por apólice).</li>
+              <li><strong>Financiamento:</strong> pode ajudar a avaliar se o valor financiado está coerente com o mercado.</li>
+            </ul>
+          
+            <p class="seo-content__text">
+              Dica rápida: se o valor anunciado estiver <strong>muito abaixo</strong> da FIPE, vale redobrar a atenção para histórico e documentação.
+            </p>
+          </section>
+          <section class="seo-content" aria-labelledby="checklist-title">
+            <h2 id="checklist-title" class="seo-content__heading">Checklist rápido antes de fechar negócio</h2>
+          
+            <ul class="seo-content__list">
+              <li>Confirme se <strong>chassi/placa</strong> e dados do documento batem com o veículo.</li>
+              <li>Verifique <strong>histórico de sinistro</strong>, leilão, multas e restrições.</li>
+              <li>Analise <strong>revisões</strong> e notas fiscais de manutenção (quando houver).</li>
+              <li>Faça um <strong>test-drive</strong> e, se possível, uma avaliação com mecânico de confiança.</li>
+              <li>Compare anúncios semelhantes na sua região para entender o <strong>preço real de mercado</strong>.</li>
+            </ul>
+          </section>
+          <section class="seo-content" aria-labelledby="faq-title">
+            <h2 id="faq-title" class="seo-content__heading">Perguntas frequentes</h2>
+          
+            <div class="seo-content__faq">
+              <details class="seo-content__details">
+                <summary class="seo-content__summary">A Tabela FIPE muda todo mês?</summary>
+                <p class="seo-content__details-text">
+                  Sim. Os valores são atualizados mensalmente. Por isso mostramos o mês de referência junto do resultado.
+                </p>
+              </details>
+          
+              <details class="seo-content__details">
+                <summary class="seo-content__summary">O valor FIPE é o mesmo que preço de venda?</summary>
+                <p class="seo-content__details-text">
+                  Não necessariamente. A FIPE é uma referência de preço médio. O valor final depende de conservação, quilometragem,
+                  versão, região e demanda.
+                </p>
+              </details>
+          
+              <details class="seo-content__details">
+                <summary class="seo-content__summary">Por que existem valores diferentes para combustíveis/versões?</summary>
+                <p class="seo-content__details-text">
+                  Alguns modelos têm mais de uma versão (motor/combustível/acabamento). Cada versão pode ter um valor de referência
+                  diferente na FIPE.
+                </p>
+              </details>
+            </div>
+          </section>
     </main>
 
     <x-footer />
