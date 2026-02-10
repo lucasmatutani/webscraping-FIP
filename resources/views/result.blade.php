@@ -1,11 +1,7 @@
 @php
-    if (!isset($car)) {
-        redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.')->send();
-        exit;
-    }
     $ano = isset($car) ? ($car['year_display'] ?? $car['year']) : null;
     $title = isset($car) ? "Preço FIPE {$car['brand']} {$car['model']} {$ano} - {$car['reference_month']}" : 'Tabela FIPE';
-    $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor oficial atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
+    $description = isset($car) ? "Consulte o preço FIPE do {$car['brand']} {$car['model']} {$ano} para compra, venda. Valor atualizado em {$car['reference_month']}" : 'Consulte os valores atualizados da tabela FIPE para carros de todo o Brasil.';
     $canonical = route('resultado.slug', [
         'brandSlug' => Str::slug($car['brand']),
         'modelSlug' => Str::slug($car['model']),
@@ -17,9 +13,6 @@
 <html lang="pt-BR">
 
 <head>
-    @if(!isset($car))
-        <meta name="robots" content="noindex,follow">
-    @endif
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
@@ -72,24 +65,7 @@
                             "name": "{{ $car['brand'] }} {{ $car['model'] }} {{ $ano }}",
                             "url": "{{ $canonical }}",
                             "image": "{{ asset('images/social_media.png') }}",
-                            "description": "Valor FIPE Atualizado de referência - {{ $car['reference_month'] }}",
-                            "additionalProperty": [
-                                {
-                                    "@type": "PropertyValue",
-                                    "name": "Ano Modelo",
-                                    "value": "{{ $ano }}"
-                                },
-                                {
-                                    "@type": "PropertyValue",
-                                    "name": "Código FIPE",
-                                    "value": "{{ $car['fipe_code'] }}"
-                                },
-                                {
-                                    "@type": "PropertyValue",
-                                    "name": "Mês Referência",
-                                    "value": "{{ $car['reference_month'] }}"
-                                }
-                            ]
+                            "description": "Valor FIPE Atualizado de referência - {{ $car['reference_month'] }}"
                         }
                         </script>
     @endif

@@ -153,6 +153,10 @@ class FipeController extends Controller
             'brand' => $value->model->brand->name ?? 'N/A',
         ];
 
+        if (empty($car)) {
+            return redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.');
+        }
+
         return view('result', ['car' => $car]);
     }
 
