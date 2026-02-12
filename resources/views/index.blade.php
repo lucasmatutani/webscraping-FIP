@@ -2,7 +2,7 @@
     $referenceMonthHuman = now()->locale('pt_BR')->translatedFormat('F \d\e Y');
     $title = 'Tabela FIPE Atualizada: Consulte o Preço de Carros por Marca, Modelo e Ano';
     $description = 'Consulte a Tabela FIPE atualizada e veja o preço médio de carros por marca, modelo e ano. Resultado rápido atualizado em ' . $referenceMonthHuman . '.';
-    $canonical = url('/');
+    $canonical = "https://www.ilovecarros.com.br/";
 @endphp
 <!DOCTYPE html>
 <html lang="pt-BR">
