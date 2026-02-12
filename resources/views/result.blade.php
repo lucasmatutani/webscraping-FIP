@@ -51,10 +51,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap">
     </noscript>
 
-    @if(isset($car))
+    {{-- @if(isset($car))
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
             crossorigin="anonymous"></script>
-    @endif
+    @endif --}}
     @vite(['resources/js/app.js'])
 
     @if(isset($car))
