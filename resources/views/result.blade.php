@@ -22,7 +22,7 @@
         .container p{font-size:17px}
         .header{display:flex;align-items:center;min-height:80px;background:#000;width:100%;box-sizing:border-box;padding:0 1rem}
         .header a{display:inline-block}
-        .header img{display:block;width:20vw;max-height:140px;height:auto;object-fit:contain}
+        .header img{display:block;width:20vw;max-height:140px;height:auto;object-fit:contain;aspect-ratio:320/140}
         .result-section{display:flex;flex-direction:column;justify-content:center;align-items:center;background:#910506;padding:18px 36px;color:#fff;border-radius:35px;width:40%;margin:20px 0;text-align:center}
         .result-section-container{display:flex;flex-direction:column;align-items:center}
         .result-section__breadcrumb{align-self:flex-start;width:100%;margin-bottom:1rem}
@@ -113,8 +113,7 @@
         <a href="{{ url('/') }}" aria-label="Voltar para consulta FIPE">
             <picture>
                 <source srcset="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp">
-                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE"
-                    fetchpriority="high" loading="eager">
+                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" width="320" height="140" fetchpriority="high" loading="eager">
             </picture>
         </a>
     </header>

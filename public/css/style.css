@@ -41,6 +41,7 @@ body {
     max-height: 140px;
     height: auto;
     object-fit: contain;
+    aspect-ratio: 320 / 140;
 }
 
 /* Footer */
