@@ -354,6 +354,51 @@ body {
     margin: 0;
 }
 
+/* Outros anos do mesmo modelo */
+.other-years {
+    margin-top: 2rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.other-years__title {
+    font-size: 1.2em;
+    margin: 0 0 0.5rem 0;
+}
+
+.other-years__intro {
+    margin: 0 0 1.2rem 0;
+    opacity: 0.95;
+    font-size: 0.95em;
+}
+
+.other-years__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+}
+
+.other-years__item {
+    margin: 0;
+}
+
+.other-years__link {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: opacity 0.2s;
+}
+
+.other-years__link:hover,
+.other-years__link:focus {
+    opacity: 0.9;
+}
+
 .result-action-icon {
     display: inline-flex;
     align-items: center;

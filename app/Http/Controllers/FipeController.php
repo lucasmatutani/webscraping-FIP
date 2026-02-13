@@ -157,7 +157,31 @@ class FipeController extends Controller
             return redirect('/')->with('error', 'Nenhum valor encontrado para essa combinação.');
         }
 
-        return view('result', ['car' => $car]);
+        $otherYears = CarsValue::where('model_id', $model->id)
+            ->where('year', '!=', $yearValue)
+            ->select('year')
+            ->distinct()
+            ->orderByDesc('year')
+            ->limit(5)
+            ->get()
+            ->map(function ($row) use ($brandSlug, $modelSlug, $car) {
+                $yearSegment = (string) $row->year;
+                $yearDisplay = $row->year == 0 ? '0km' : (string) $row->year;
+                return [
+                    'year' => $yearSegment,
+                    'year_display' => $yearDisplay,
+                    'url' => route('resultado.slug', [
+                        'brandSlug' => $brandSlug,
+                        'modelSlug' => $modelSlug,
+                        'year' => $yearSegment,
+                    ]),
+                    'link_text' => "Preço FIPE {$car['brand']} {$car['model']} {$yearDisplay}",
+                ];
+            })
+            ->values()
+            ->all();
+
+        return view('result', ['car' => $car, 'otherYears' => $otherYears]);
     }
 
     /**

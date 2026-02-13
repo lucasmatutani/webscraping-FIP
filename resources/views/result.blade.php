@@ -165,6 +165,21 @@
                             </div>
                         </div>
                     </div>
+
+                    @if(!empty($otherYears))
+                        <nav class="other-years" aria-labelledby="other-years-title">
+                            <h2 id="other-years-title" class="other-years__title">Outros anos do mesmo modelo</h2>
+                            <p class="other-years__intro">Consulte o valor FIPE do {{ $car['brand'] }} {{ $car['model'] }} em outros anos:</p>
+                            <ul class="other-years__list">
+                                @foreach($otherYears as $item)
+                                    <li class="other-years__item">
+                                        <a href="{{ $item['url'] }}" class="other-years__link">{{ $item['link_text'] }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </nav>
+                    @endif
+
                     <div class="result-actions">
                         <a href="{{ url('/') }}" class="buttom-submit">REFAZER PESQUISA</a>
                         {{-- <button type="button" onclick="window.print()" class="result-action-icon"
