@@ -10,61 +10,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- CSS crítico inline: evita layout shift no body/main enquanto style.css carrega (preload assíncrono) --}}
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #fff;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .container p {
-            font-size: 17px;
-        }
-        #searchForm {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            min-height: 80px;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0 1rem;
-        }
-        .search-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 40%;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .search-form {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            width: 55%;
-        }
-        @media (max-width: 450px) {
-            .search-section { width: 100%; }
-            .search-form { width: 100%; }
-        }
-        @media (max-width: 320px) {
-            .search-section { width: 75%; }
-        }
-    </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ $canonical }}">
@@ -109,16 +54,11 @@
     {{-- Preload do logo em WebP (LCP, menor tamanho no mobile) --}}
     <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp" fetchpriority="high">
 
-    {{-- Preconnect para reduzir latência do Google Fonts --}}
+    {{-- CSS e fontes em carregamento bloqueante: evita layout shift (primeira pintura já com estilos) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    {{-- CSS e Fonts carregam de forma não bloqueante (evita render-blocking) --}}
-    <link rel="preload" href="{{ asset('css/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('css/style.css') }}"></noscript>
-
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"></noscript>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional">
     @vite(['resources/js/app.js'])
 </head>
 
