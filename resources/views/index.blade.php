@@ -10,6 +10,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- CSS crítico acima da dobra: header, layout base, tipografia, grid, skeleton --}}
+    <style>
+        body{margin:0;padding:0;font-family:'Arial',sans-serif;background:#fff}
+        .container{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif}
+        .container p{font-size:17px}
+        .container button{font-family:'Montserrat',sans-serif}
+        .header{display:flex;align-items:center;min-height:80px;background:#000;width:100%;box-sizing:border-box;padding:0 1rem}
+        .header a{display:inline-block}
+        .header img{display:block;width:20vw;max-height:140px;height:auto;object-fit:contain}
+        #searchForm{display:flex;align-items:center;justify-content:center;width:100%}
+        .search-section,.result-section{display:flex;flex-direction:column;justify-content:center;align-items:center;background:#910506;padding:18px 36px;color:#fff;border-radius:35px;width:40%;margin:20px 0;text-align:center}
+        .search-section h1{text-align:center}
+        .search-section h2{margin:10px 0;font-weight:700}
+        .search-form{display:flex;flex-direction:column;text-align:left;width:55%}
+        .search-form label{margin:20px 0 10px 5px;font-weight:700;font-size:18px}
+        .choices__inner{width:100%;min-height:45px;border-radius:20px;padding:10px 20px;box-sizing:border-box}
+        .buttom-submit{padding:10px 25px;font-size:16px;font-weight:700;border-radius:15px;margin:20px auto 0;cursor:pointer;display:inline-block;text-align:center}
+        .search-error{padding:10px 15px;border-radius:10px;margin-bottom:15px;font-weight:700}
+        .footer{width:100%;box-sizing:border-box;padding:2rem 1rem}
+        .seo-content{display:flex;flex-direction:column;align-items:center;width:50%;margin-bottom:2rem;box-sizing:border-box}
+        @media (max-width:1024px){.search-section,.result-section{width:60%}.seo-content{width:60%}}
+        @media (max-width:450px){.search-section,.result-section{width:100%;margin:0;border-radius:0;padding:10px}.search-form{width:100%}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.seo-content{width:100%;padding:2rem 1.5rem}}
+        @media (max-width:320px){.search-section,.result-section{width:75%}}
+    </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ $canonical }}">
@@ -54,11 +78,13 @@
     {{-- Preload do logo em WebP (LCP, menor tamanho no mobile) --}}
     <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp" fetchpriority="high">
 
-    {{-- CSS e fontes em carregamento bloqueante: evita layout shift (primeira pintura já com estilos) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional">
+    {{-- CSS completo carregado de forma assíncrona (acima da dobra já está no crítico inline) --}}
+    <link rel="preload" href="{{ asset('css/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('css/style.css') }}"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional"></noscript>
     @vite(['resources/js/app.js'])
 </head>
 

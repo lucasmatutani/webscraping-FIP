@@ -15,6 +15,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- CSS crítico acima da dobra: header, layout base, tipografia, grid, skeleton --}}
+    <style>
+        body{margin:0;padding:0;font-family:'Arial',sans-serif;background:#fff}
+        .container{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif}
+        .container p{font-size:17px}
+        .header{display:flex;align-items:center;min-height:80px;background:#000;width:100%;box-sizing:border-box;padding:0 1rem}
+        .header a{display:inline-block}
+        .header img{display:block;width:20vw;max-height:140px;height:auto;object-fit:contain}
+        .result-section{display:flex;flex-direction:column;justify-content:center;align-items:center;background:#910506;padding:18px 36px;color:#fff;border-radius:35px;width:40%;margin:20px 0;text-align:center}
+        .result-section-container{display:flex;flex-direction:column;align-items:center}
+        .result-section__breadcrumb{align-self:flex-start;width:100%;margin-bottom:1rem}
+        .breadcrumb{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;font-size:.9rem;font-family:'Montserrat',sans-serif}
+        .breadcrumb__item{display:inline-flex;align-items:center;gap:.35rem}
+        .breadcrumb__item:not(:last-child)::after{content:'/';color:rgba(255,255,255,.7)}
+        .breadcrumb__item a{color:rgba(255,255,255,.95);text-decoration:none}
+        .breadcrumb__item--current span{color:#fff;font-weight:600}
+        .result-section h1,.result-section .result-title{text-align:center;margin:30px 0 10px;font-size:1.4em}
+        .result-section h2{margin:10px 0;font-weight:700;margin-top:35px;font-size:1.3em}
+        .container .result-price{text-align:center;font-size:2rem;font-weight:800;color:#fff;margin:30px auto;padding:1.25rem 2rem;max-width:fit-content;background:rgba(0,0,0,.25);border-radius:16px;border:2px solid rgba(255,255,255,.35);line-height:1.2}
+        .container-result{width:95%;text-align:left}
+        .container-table{background:#fff;padding:15px;border-radius:35px;margin-top:10px}
+        .container-padding{padding:0 10px 10px}
+        .container-values{width:100%;margin-top:35px;display:flex;flex-direction:row}
+        .container-values .label{width:40%;font-weight:700;font-size:16px;color:#000}
+        .container-values .value{padding-left:20px;font-size:16px;color:#000}
+        .container-values .underline{width:100%;height:10px}
+        .result-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:24px}
+        .result-actions .buttom-submit{text-decoration:none;margin:0}
+        .buttom-submit{padding:10px 25px;font-size:16px;font-weight:700;border-radius:15px;cursor:pointer;display:inline-block}
+        .result-action-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border-radius:15px;font-size:1.25rem}
+        .other-years{margin-top:2rem;padding:1.25rem 0;text-align:center}
+        .other-years__title{font-size:1.2em;margin:0 0 .5rem}
+        .other-years__intro{margin:0 0 .75rem;font-size:.95em}
+        .other-years__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1rem}
+        .other-years__link{color:#fff;text-decoration:underline}
+        .footer{width:100%;box-sizing:border-box;padding:2rem 1rem}
+        .seo-content{display:flex;flex-direction:column;align-items:center;width:50%;margin-bottom:2rem;box-sizing:border-box}
+        @media (max-width:1024px){.result-section{width:60%}.seo-content{width:60%}}
+        @media (max-width:450px){.result-section{width:100%;margin:0;border-radius:0;padding:0}.result-section-container{padding:10px}.container .result-price{font-size:1.5rem}.container-result{width:95%}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.search-form{width:100%}.breadcrumb{display:none}.seo-content{width:100%;padding:2rem 1.5rem}.result-action-icon{width:40px;height:40px}.container-values .label,.container-values .value{font-size:.9rem}.container-table{padding:10px}}
+        @media (max-width:320px){.result-section{width:75%}}
+    </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ $canonical }}">
@@ -39,11 +80,13 @@
     <meta name="twitter:image:width" content="1200">
     <meta name="twitter:image:height" content="630">
 
-    {{-- CSS e fontes em carregamento bloqueante: evita layout shift (primeira pintura já com estilos) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional">
+    {{-- CSS completo carregado de forma assíncrona (acima da dobra já está no crítico inline) --}}
+    <link rel="preload" href="{{ asset('css/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('css/style.css') }}"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional"></noscript>
 
     {{-- @if(isset($car))
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"

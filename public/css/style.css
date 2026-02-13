@@ -166,7 +166,7 @@ body {
 
 .choices__inner {
     width: 100%;
-    height: 25px;
+    min-height: 45px;
     margin: 0 auto;
     border-radius: 20px;
     background-color: #ff6161 !important;
@@ -175,7 +175,9 @@ body {
     font-weight: bold;
     border: none !important;
     padding: 10px 20px;
-    min-height: 0 !important;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
 }
 
 /* Texto do valor selecionado no select (fechado) */
