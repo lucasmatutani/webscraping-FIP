@@ -23,6 +23,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container p {
+            font-size: 17px;
+        }
+        #searchForm {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
         .header {
             display: flex;
@@ -40,6 +50,16 @@
             width: 40%;
             margin: 20px 0;
             text-align: center;
+        }
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            width: 55%;
+        }
+        @media (max-width: 450px) {
+            .search-section { width: 100%; }
+            .search-form { width: 100%; }
         }
         @media (max-width: 320px) {
             .search-section { width: 75%; }
