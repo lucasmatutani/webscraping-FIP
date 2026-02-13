@@ -10,6 +10,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- CSS crítico inline: evita layout shift no mobile enquanto style.css carrega (preload assíncrono) --}}
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            min-height: 80px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 1rem;
+        }
+        .search-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        @media (max-width: 320px) {
+            .search-section { width: 75%; }
+        }
+    </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ $canonical }}">
