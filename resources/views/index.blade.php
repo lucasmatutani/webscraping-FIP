@@ -10,8 +10,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- CSS crítico inline: evita layout shift no mobile enquanto style.css carrega (preload assíncrono) --}}
+    {{-- CSS crítico inline: evita layout shift no body/main enquanto style.css carrega (preload assíncrono) --}}
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+        }
         .container {
             display: flex;
             flex-direction: column;
