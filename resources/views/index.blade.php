@@ -31,8 +31,8 @@
         .footer{width:100%;box-sizing:border-box;padding:2rem 1rem}
         .seo-content{display:flex;flex-direction:column;align-items:center;width:50%;margin-bottom:2rem;box-sizing:border-box}
         @media (max-width:1024px){.search-section,.result-section{width:60%}.seo-content{width:60%}}
-        @media (max-width:450px){.search-section,.result-section{width:100%;margin:0;border-radius:0;padding:10px}.search-form{width:100%}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.seo-content{width:100%;padding:2rem 1.5rem}}
-        @media (max-width:320px){.search-section,.result-section{width:75%}}
+        @media (max-width:450px){.search-section,.result-section{width:100%;margin:0;border-radius:0;padding:10px;min-height:420px}.search-form{width:100%;min-height:280px}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.seo-content{width:100%;padding:2rem 1.5rem}}
+        @media (max-width:320px){.search-section,.result-section{width:75%;min-height:400px}}
     </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
