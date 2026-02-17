@@ -1,7 +1,7 @@
 @php
     $title = 'Política de Privacidade - Carros do Brasil - Tabela FIPE';
     $description = 'Política de Privacidade do Carros do Brasil. Conheça como tratamos cookies, dados do Google AdSense e Google DoubleClick em nosso site de consulta à Tabela FIPE.';
-    $canonical = url('/politica-de-privacidade');
+    $canonical = 'https://ilovecarros.com.br/politica-de-privacidade';
 @endphp
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -53,7 +53,7 @@
         <section class="seo-content politica-privacidade" aria-labelledby="politica-title">
             <h1 id="politica-title" class="seo-content__title">Política de Privacidade</h1>
             <p class="seo-content__text">
-                Esta Política de Privacidade descreve como o <strong>Carros do Brasil - Tabela FIPE</strong> coleta,
+                Esta Política de Privacidade descreve como o <strong>Ilovecarros - Tabela FIPE</strong> coleta,
                 usa e protege as informações dos visitantes. Ao utilizar nosso site, você concorda com as práticas
                 descritas neste documento.
             </p>

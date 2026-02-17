@@ -1,7 +1,7 @@
 @php
     $title = 'Termos de Uso - Carros do Brasil - Tabela FIPE';
     $description = 'Termos de Uso do Carros do Brasil. Conheça as condições de utilização do nosso site de consulta à Tabela FIPE.';
-    $canonical = url('/termos-de-uso');
+    $canonical = 'https://ilovecarros.com.br/termos-de-uso';
 @endphp
 <!DOCTYPE html>
 <html lang="pt-BR">
