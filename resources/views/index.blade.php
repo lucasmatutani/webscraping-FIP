@@ -25,14 +25,15 @@
         .search-section h2{margin:10px 0;font-weight:700}
         .search-form{display:flex;flex-direction:column;text-align:left;width:55%}
         .search-form label{margin:20px 0 10px 5px;font-weight:700;font-size:18px}
-        .choices__inner{width:100%;min-height:45px;border-radius:20px;padding:10px 20px;box-sizing:border-box}
+        .choices__inner{width:100%;min-height:48px;border-radius:20px;padding:10px 20px;box-sizing:border-box}
+        .search-form .choices,.search-form label+*{min-height:48px}
         .buttom-submit{padding:10px 25px;font-size:16px;font-weight:700;border-radius:15px;margin:20px auto 0;cursor:pointer;display:inline-block;text-align:center}
         .search-error{padding:10px 15px;border-radius:10px;margin-bottom:15px;font-weight:700}
         .footer{width:100%;box-sizing:border-box;padding:2rem 1rem}
         .seo-content{display:flex;flex-direction:column;align-items:center;width:50%;margin-bottom:2rem;box-sizing:border-box}
         @media (max-width:1024px){.search-section,.result-section{width:60%}.seo-content{width:60%}}
-        @media (max-width:450px){.search-section,.result-section{width:100%;margin:0;border-radius:0;padding:10px;min-height:420px}.search-form{width:100%;min-height:280px}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.seo-content{width:100%;padding:2rem 1.5rem}}
-        @media (max-width:320px){.search-section,.result-section{width:75%;min-height:400px}}
+        @media (max-width:450px){.search-section,.result-section{width:100%;margin:0;border-radius:0;padding:10px;min-height:480px}.search-form{width:100%;min-height:320px;gap:4px}.search-form .choices__inner,.search-form .choices{min-height:48px}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.seo-content{width:100%;padding:2rem 1.5rem}}
+        @media (max-width:320px){.search-section,.result-section{width:75%;min-height:460px}.search-form{min-height:300px}}
     </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
