@@ -34,8 +34,6 @@
     <noscript><link rel="stylesheet" href="{{ asset('css/style.css') }}"></noscript>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"></noscript>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
-     crossorigin="anonymous"></script>
     @vite(['resources/js/app.js'])
 </head>
 
