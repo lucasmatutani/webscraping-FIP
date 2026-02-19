@@ -172,6 +172,24 @@
             min-height: 480px
         }
 
+        .ad-top {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 12px 0;
+            min-height: 60px;
+            /* reserva espaço e reduz CLS no desktop */
+        }
+
+        @media (max-width: 767px) {
+            .ad-top {
+                min-height: 50px;
+            }
+            .container {
+                background-color: #910506;
+            }
+        }
+
         @media (max-width:450px) {
             .banner-sidebar {
                 display: none
@@ -291,8 +309,6 @@
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional">
     </noscript>
-    <script async="async" data-cfasync="false"
-        src="https://pl28747347.effectivegatecpm.com/769b5b2f74c150b281688d65356a64d6/invoke.js"></script>
     @vite(['resources/js/app.js'])
 </head>
 
@@ -308,9 +324,30 @@
     </header>
 
     <main class="container" role="main">
-        <div id="container-93b971e9a7449882a232af22feeae186" class="banner-top"></div>
+        <div id="ad-top" class="ad-top"></div>
         <script>
-            atOptions = { 'key': '93b971e9a7449882a232af22feeae186', 'format': 'iframe', 'height': 60, 'width': 468, 'params': {} };
+            (function () {
+                const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+                const zone = isMobile
+                    ? { key: "9ecf0c01d6e301fbf83ee70d4ec11631", w: 320, h: 50 }
+                    : { key: "93b971e9a7449882a232af22feeae186", w: 468, h: 60 };
+
+                window.atOptions = {
+                    key: zone.key,
+                    format: "iframe",
+                    width: zone.w,
+                    height: zone.h,
+                    params: {}
+                };
+
+                const s = document.createElement("script");
+                s.type = "text/javascript";
+                s.async = false; // importante pra não misturar com outros atOptions
+                s.src = `https://angrilyrecede.com/${zone.key}/invoke.js`;
+
+                document.getElementById("ad-top").appendChild(s);
+            })();
         </script>
         <script src="https://angrilyrecede.com/93b971e9a7449882a232af22feeae186/invoke.js"></script>
         <form action="{{ route('resultado') }}" method="GET" id="searchForm">
@@ -353,6 +390,7 @@
 
         <aside class="banner-sidebar banner-sidebar-left" aria-label="Publicidade">
             <div id="container-769b5b2f74c150b281688d65356a64d6"></div>
+            <script src="https://pl28747347.effectivegatecpm.com/769b5b2f74c150b281688d65356a64d6/invoke.js"></script>
         </aside>
 
         <aside class="banner-sidebar banner-sidebar-right" aria-label="Publicidade">
@@ -403,6 +441,7 @@
     </main>
 
     <x-footer />
+    <script src="https://angrilyrecede.com/4f/f0/db/4ff0db6625edb96f24a0b87c302ab75e.js"></script>
 </body>
 
 </html>
