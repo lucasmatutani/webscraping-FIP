@@ -185,6 +185,10 @@ body {
     .banner-sidebar {
         display: none;
     }
+
+    .banner-top #container-93b971e9a7449882a232af22feeae186 {
+        display: none;
+    }
 }
 
 .search-buttons button:hover {
