@@ -188,6 +188,11 @@
             .container {
                 background-color: #910506;
             }
+            .search-form .choices__inner,
+            .search-form .choices,
+            .search-form label+* {
+                min-height: 56px;
+            }
         }
 
         @media (max-width:450px) {
@@ -211,8 +216,9 @@
             }
 
             .search-form .choices__inner,
-            .search-form .choices {
-                min-height: 48px
+            .search-form .choices,
+            .search-form label+* {
+                min-height: 56px
             }
 
             .container p {
