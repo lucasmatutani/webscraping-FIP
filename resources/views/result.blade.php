@@ -88,10 +88,10 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional"></noscript>
 
-    {{-- @if(isset($car))
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
-            crossorigin="anonymous"></script>
-    @endif --}}
+    @if(isset($car))
+    <script async="async" data-cfasync="false"
+    src="https://pl28747347.effectivegatecpm.com/769b5b2f74c150b281688d65356a64d6/invoke.js"></script>
+    @endif
     @vite(['resources/js/app.js'])
 
     @if(isset($car))
@@ -119,6 +119,13 @@
     </header>
 
     <main class="container" role="main">
+        @if(isset($car))
+        <div id="container-93b971e9a7449882a232af22feeae186" class="banner-top"></div>
+        <script>
+            atOptions = { 'key': '93b971e9a7449882a232af22feeae186', 'format': 'iframe', 'height': 60, 'width': 468, 'params': {} };
+        </script>
+        <script src="https://angrilyrecede.com/93b971e9a7449882a232af22feeae186/invoke.js"></script>
+        @endif
         <section class="result-section" aria-labelledby="result-title">
             <div class="result-section-container">
                 <nav class="result-section__breadcrumb" aria-label="Breadcrumb">
@@ -240,6 +247,21 @@
                 @endif
             </div>
         </section>
+
+        <aside class="banner-sidebar banner-sidebar-left" aria-label="Publicidade">
+            <div id="container-769b5b2f74c150b281688d65356a64d6"></div>
+        </aside>
+
+        <aside class="banner-sidebar banner-sidebar-right" aria-label="Publicidade">
+            @if(isset($car))
+            <div id="container-e43184464170d0b33ac684feac6d921a"></div>
+            <script>
+                atOptions = { 'key': 'e43184464170d0b33ac684feac6d921a', 'format': 'iframe', 'height': 600, 'width': 160, 'params': {} };
+            </script>
+            <script src="https://www.highperformanceformat.com/e43184464170d0b33ac684feac6d921a/invoke.js"></script>
+            @endif
+        </aside>
+
         <section class="seo-content" aria-labelledby="interpretacao-title">
             <h2 id="interpretacao-title" class="seo-content__heading">O que significa o valor FIPE?</h2>
 

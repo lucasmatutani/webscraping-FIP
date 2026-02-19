@@ -12,30 +12,226 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- CSS crítico acima da dobra: header, layout base, tipografia, grid, skeleton --}}
     <style>
-        body{margin:0;padding:0;font-family:'Arial',sans-serif;background:#fff}
-        .container{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif}
-        .container p{font-size:17px}
-        .container button{font-family:'Montserrat',sans-serif}
-        .header{display:flex;align-items:center;min-height:80px;background:#000;width:100%;box-sizing:border-box;padding:0 1rem}
-        .header a{display:inline-block}
-        .header img{display:block;width:20vw;max-height:140px;height:auto;object-fit:contain;aspect-ratio:320/140}
-        .container{position:relative}
-        #searchForm{display:flex;align-items:center;justify-content:center;width:100%}
-        .search-section,.result-section{display:flex;flex-direction:column;justify-content:center;align-items:center;background:#910506;padding:18px 36px;color:#fff;border-radius:35px;width:40%;margin:20px 0;text-align:center}
-        .search-section h1{text-align:center}
-        .search-section h2{margin:10px 0;font-weight:700}
-        .search-form{display:flex;flex-direction:column;text-align:left;width:55%}
-        .search-form label{margin:20px 0 10px 5px;font-weight:700;font-size:18px}
-        .choices__inner{width:100%;min-height:48px;border-radius:20px;padding:10px 20px;box-sizing:border-box}
-        .search-form .choices,.search-form label+*{min-height:48px}
-        .buttom-submit{padding:10px 25px;font-size:16px;font-weight:700;border-radius:15px;margin:20px auto 0;cursor:pointer;display:inline-block;text-align:center}
-        .search-error{padding:10px 15px;border-radius:10px;margin-bottom:15px;font-weight:700}
-        .footer{width:100%;box-sizing:border-box;padding:2rem 1rem}
-        .seo-content{display:flex;flex-direction:column;align-items:center;width:50%;margin-bottom:2rem;box-sizing:border-box}
-        @media (max-width:1024px){.search-section,.result-section{width:60%}.seo-content{width:60%}}
-        .banner-sidebar{position:absolute;top:20px;right:0;width:120px;min-height:480px}
-        @media (max-width:450px){.banner-sidebar{display:none}.search-section,.result-section{width:100%;margin:0;border-radius:0;padding:10px;min-height:480px}.search-form{width:100%;min-height:320px;gap:4px}.search-form .choices__inner,.search-form .choices{min-height:48px}.container p{font-size:0.9rem}h1{font-size:1.1rem}h2{font-size:1rem}.header img{width:60vw;margin:0 auto}.seo-content{width:100%;padding:2rem 1.5rem}}
-        @media (max-width:320px){.search-section,.result-section{width:75%;min-height:460px}.search-form{min-height:300px}}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #fff
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif
+        }
+
+        .container p {
+            font-size: 17px
+        }
+
+        .container button {
+            font-family: 'Montserrat', sans-serif
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            min-height: 80px;
+            background: #000;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 1rem
+        }
+
+        .header a {
+            display: inline-block
+        }
+
+        .header img {
+            display: block;
+            width: 20vw;
+            max-height: 140px;
+            height: auto;
+            object-fit: contain;
+            aspect-ratio: 320/140
+        }
+
+        .container {
+            position: relative
+        }
+
+        #searchForm {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%
+        }
+
+        .search-section,
+        .result-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #910506;
+            padding: 18px 36px;
+            color: #fff;
+            border-radius: 35px;
+            width: 40%;
+            margin: 20px 0;
+            text-align: center
+        }
+
+        .search-section h1 {
+            text-align: center
+        }
+
+        .search-section h2 {
+            margin: 10px 0;
+            font-weight: 700
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            width: 55%
+        }
+
+        .search-form label {
+            margin: 20px 0 10px 5px;
+            font-weight: 700;
+            font-size: 18px
+        }
+
+        .choices__inner {
+            width: 100%;
+            min-height: 48px;
+            border-radius: 20px;
+            padding: 10px 20px;
+            box-sizing: border-box
+        }
+
+        .search-form .choices,
+        .search-form label+* {
+            min-height: 48px
+        }
+
+        .buttom-submit {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 15px;
+            margin: 20px auto 0;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center
+        }
+
+        .search-error {
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: 700
+        }
+
+        .footer {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 2rem 1rem
+        }
+
+        .seo-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            margin-bottom: 2rem;
+            box-sizing: border-box
+        }
+
+        @media (max-width:1024px) {
+
+            .search-section,
+            .result-section {
+                width: 60%
+            }
+
+            .seo-content {
+                width: 60%
+            }
+        }
+
+        .banner-sidebar {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            width: 120px;
+            min-height: 480px
+        }
+
+        @media (max-width:450px) {
+            .banner-sidebar {
+                display: none
+            }
+
+            .search-section,
+            .result-section {
+                width: 100%;
+                margin: 0;
+                border-radius: 0;
+                padding: 10px;
+                min-height: 480px
+            }
+
+            .search-form {
+                width: 100%;
+                min-height: 320px;
+                gap: 4px
+            }
+
+            .search-form .choices__inner,
+            .search-form .choices {
+                min-height: 48px
+            }
+
+            .container p {
+                font-size: 0.9rem
+            }
+
+            h1 {
+                font-size: 1.1rem
+            }
+
+            h2 {
+                font-size: 1rem
+            }
+
+            .header img {
+                width: 60vw;
+                margin: 0 auto
+            }
+
+            .seo-content {
+                width: 100%;
+                padding: 2rem 1.5rem
+            }
+        }
+
+        @media (max-width:320px) {
+
+            .search-section,
+            .result-section {
+                width: 75%;
+                min-height: 460px
+            }
+
+            .search-form {
+                min-height: 300px
+            }
+        }
     </style>
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
@@ -62,7 +258,7 @@
     <meta name="twitter:image:height" content="630">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5083190284611847"
-     crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -79,16 +275,24 @@
     </script>
 
     {{-- Preload do logo em WebP (LCP, menor tamanho no mobile) --}}
-    <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp"
+        fetchpriority="high">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {{-- CSS completo carregado de forma assíncrona (acima da dobra já está no crítico inline) --}}
     <link rel="preload" href="{{ asset('css/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('css/style.css') }}"></noscript>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional"></noscript>
-    <script async="async" data-cfasync="false" src="https://pl28747347.effectivegatecpm.com/769b5b2f74c150b281688d65356a64d6/invoke.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=optional">
+    </noscript>
+    <script async="async" data-cfasync="false"
+        src="https://pl28747347.effectivegatecpm.com/769b5b2f74c150b281688d65356a64d6/invoke.js"></script>
     @vite(['resources/js/app.js'])
 </head>
 
@@ -97,12 +301,18 @@
         <a href="{{ url('/') }}" aria-label="Ir para página inicial - Consulta FIPE">
             <picture>
                 <source srcset="{{ asset('images/logo_i_love_carros.webp') }}" type="image/webp">
-                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" width="320" height="140" fetchpriority="high" loading="eager">
+                <img src="{{ asset('images/logo_i_love_carros.png') }}" alt="Carros do Brasil - Tabela FIPE" width="320"
+                    height="140" fetchpriority="high" loading="eager">
             </picture>
         </a>
     </header>
 
     <main class="container" role="main">
+        <div id="container-93b971e9a7449882a232af22feeae186" class="banner-top"></div>
+        <script>
+            atOptions = { 'key': '93b971e9a7449882a232af22feeae186', 'format': 'iframe', 'height': 60, 'width': 468, 'params': {} };
+        </script>
+        <script src="https://angrilyrecede.com/93b971e9a7449882a232af22feeae186/invoke.js"></script>
         <form action="{{ route('resultado') }}" method="GET" id="searchForm">
             <section class="search-section" id="commonSearchSection" aria-labelledby="search-title">
                 <h1 id="search-title">Consulta Tabela FIPE</h1>
@@ -141,8 +351,16 @@
             </section>
         </form>
 
-        <aside class="banner-sidebar" aria-label="Publicidade">
+        <aside class="banner-sidebar banner-sidebar-left" aria-label="Publicidade">
             <div id="container-769b5b2f74c150b281688d65356a64d6"></div>
+        </aside>
+
+        <aside class="banner-sidebar banner-sidebar-right" aria-label="Publicidade">
+            <div id="container-e43184464170d0b33ac684feac6d921a"></div>
+            <script>
+                atOptions = { 'key': 'e43184464170d0b33ac684feac6d921a', 'format': 'iframe', 'height': 600, 'width': 160, 'params': {} };
+            </script>
+            <script src="https://www.highperformanceformat.com/e43184464170d0b33ac684feac6d921a/invoke.js"></script>
         </aside>
 
         <section class="seo-content" aria-labelledby="seo-content-title">
