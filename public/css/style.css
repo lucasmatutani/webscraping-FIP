@@ -147,6 +147,30 @@ body {
     width: 100%;
 }
 
+/* Banner vertical (1:4) com position absolute – fora do fluxo, não altera o form */
+.container {
+    position: relative;
+}
+
+.banner-sidebar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    min-height: 480px;
+}
+
+.banner-sidebar #container-769b5b2f74c150b281688d65356a64d6 {
+    width: 200px;
+    min-height: 480px;
+}
+
+@media (max-width: 450px) {
+    .banner-sidebar {
+        display: none;
+    }
+}
+
 .search-buttons button:hover {
     background-color: #ffffff;
     color: #ff0000;
